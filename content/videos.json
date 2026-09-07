@@ -1,0 +1,44 @@
+{
+  "videos": [
+    {
+      "id": "vid-ankle-dorsiflex-test",
+      "title": "踝背屈与膝触墙：膝盖疼痛的祸根常在踝关节",
+      "platform": "bilibili",
+      "url": "https://www.bilibili.com/video/BV1Yk8E6HEw1/",
+      "tags": ["踝背屈", "膝触墙", "动力链"],
+      "verified": false
+    },
+    {
+      "id": "vid-ytw",
+      "title": "肩部康复黄金动作 YTW（周旋Randy）",
+      "platform": "bilibili",
+      "url": "https://www.bilibili.com/video/BV1dS4y1577g/",
+      "tags": ["肩胛", "YTW", "激活"],
+      "verified": false
+    },
+    {
+      "id": "vid-face-pull",
+      "title": "如何做弹力带面拉（肩胛后缩与外旋）",
+      "platform": "bilibili",
+      "url": "https://www.bilibili.com/video/BV1xr421g7PB/",
+      "tags": ["面拉", "肩胛", "外旋"],
+      "verified": false
+    },
+    {
+      "id": "vid-dead-bug",
+      "title": "死虫式这样做核心才真正发力",
+      "platform": "bilibili",
+      "url": "https://www.bilibili.com/video/BV1q28m63ELB/",
+      "tags": ["核心", "死虫式"],
+      "verified": false
+    },
+    {
+      "id": "vid-thoracic-rotation",
+      "title": "胸椎旋转功能训练（灵活性）",
+      "platform": "bilibili",
+      "url": "https://www.bilibili.com/video/BV1eu41197kQ/",
+      "tags": ["胸椎", "旋转", "灵活性"],
+      "verified": false
+    }
+  ]
+}

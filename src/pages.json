@@ -1,0 +1,38 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": { "navigationBarTitleText": "运动康复" }
+		},
+		{
+			"path": "pages/encyclopedia/encyclopedia",
+			"style": { "navigationBarTitleText": "伤病百科" }
+		},
+		{
+			"path": "pages/plan/plan",
+			"style": { "navigationBarTitleText": "我的训练计划" }
+		},
+		{
+			"path": "pages/region/region",
+			"style": { "navigationBarTitleText": "身体部位" }
+		},
+		{
+			"path": "pages/condition/condition",
+			"style": { "navigationBarTitleText": "伤病详情" }
+		},
+		{
+			"path": "pages/muscle/muscle",
+			"style": { "navigationBarTitleText": "人体肌肉库" }
+		},
+		{
+			"path": "pages/profile/profile",
+			"style": { "navigationBarTitleText": "我的身体档案" }
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "运动康复 · 功能性训练",
+		"navigationBarBackgroundColor": "#F5F4F0",
+		"backgroundColor": "#F5F4F0"
+	}
+}

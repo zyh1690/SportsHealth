@@ -1,0 +1,175 @@
+{
+  "exercises": [
+    {
+      "id": "ex-knee-to-wall", "name": "膝触墙（踝背屈）",
+      "targetMuscles": ["胫骨前肌", "小腿后侧", "比目鱼肌"],
+      "category": "mobility", "difficulty": 1, "equipment": ["墙"],
+      "cues": ["脚后跟贴地，膝盖朝脚尖方向前移贴墙", "脚跟离地即停止，记录膝盖到墙距离", "缓慢、有控制，感受跟腱拉伸"],
+      "commonErrors": ["脚跟翘起", "膝盖内扣对齐脚尖"],
+      "contraindications": ["踝关节急性扭伤期", "疼痛加重时"],
+      "videos": ["vid-ankle-dorsiflex-test"], "source": "康复训练/运动损伤分析"
+    },
+    {
+      "id": "ex-calf-foamroll", "name": "泡沫轴滚压小腿",
+      "targetMuscles": ["腓肠肌", "比目鱼肌"],
+      "category": "mobility", "difficulty": 1, "equipment": ["泡沫轴"],
+      "cues": ["小腿置于泡沫轴，缓慢滚动", "在痛点处停留 20-30 秒"],
+      "commonErrors": ["滚压过快", "核心松塌"],
+      "contraindications": ["静脉曲张", "急性拉伤"],
+      "videos": [], "source": "康复训练/运动损伤分析"
+    },
+    {
+      "id": "ex-dead-bug", "name": "死虫式",
+      "targetMuscles": ["腹横肌", "深层核心"],
+      "category": "stability", "difficulty": 2, "equipment": [],
+      "cues": ["下背贴地，核心收紧", "对侧手脚缓慢伸出再收回", "保持骨盆中立，不塌腰"],
+      "commonErrors": ["腰部离地", "动作过快"],
+      "contraindications": ["腰椎急性疼痛期间"],
+      "videos": ["vid-dead-bug"], "source": "康复训练/运动损伤分析"
+    },
+    {
+      "id": "ex-clamshell", "name": "蚌式开合",
+      "targetMuscles": ["臀中肌", "臀小肌"],
+      "category": "activate", "difficulty": 1, "equipment": ["弹力带(可选)"],
+      "cues": ["侧卧屈膝，双脚并拢", "膝盖打开像贝壳，骨盆保持不动", "顶端停顿，感受臀部外侧发力"],
+      "commonErrors": ["骨盆后倒", "用腰部代偿"],
+      "contraindications": ["髋部急性疼痛"],
+      "videos": [], "source": "康复训练/运动损伤分析"
+    },
+    {
+      "id": "ex-side-lying-abduction", "name": "侧卧抬腿",
+      "targetMuscles": ["臀中肌"],
+      "category": "activate", "difficulty": 1, "equipment": [],
+      "cues": ["侧卧，下侧腿屈膝稳定", "上侧腿伸直缓慢上抬", "骨盆保持垂直不翻转"],
+      "commonErrors": ["骨盆翻转", "抬腿过高借力"],
+      "contraindications": ["髋关节急性疼痛"],
+      "videos": [], "source": "康复训练/运动损伤分析"
+    },
+    {
+      "id": "ex-ytw", "name": "俯卧 Y-T-W",
+      "targetMuscles": ["菱形肌", "中下斜方肌", "肩胛稳定肌"],
+      "category": "activate", "difficulty": 1, "equipment": [],
+      "cues": ["俯卧，拇指朝上", "依次做 Y、T、W 三个姿势，肩胛后缩下沉", "无负重孤立激活，感受肩胛骨收拢"],
+      "commonErrors": ["耸肩", "用腰部代偿"],
+      "contraindications": ["肩关节急性损伤"],
+      "videos": ["vid-ytw"], "source": "康复训练/运动损伤分析"
+    },
+    {
+      "id": "ex-band-external-rotation", "name": "弹力带肩外旋",
+      "targetMuscles": ["冈下肌", "小圆肌", "肩袖外旋肌群"],
+      "category": "activate", "difficulty": 1, "equipment": ["弹力带"],
+      "cues": ["大臂贴紧身体，肘部 90 度", "前臂向外旋转，拉弹力带", "缓慢回到起始，感受肩后侧发力"],
+      "commonErrors": ["大臂离开身体", "耸肩"],
+      "contraindications": ["肩袖撕裂急性期"],
+      "videos": [], "source": "康复训练/运动损伤分析"
+    },
+    {
+      "id": "ex-band-face-pull", "name": "弹力带面拉",
+      "targetMuscles": ["菱形肌", "中下斜方肌", "三角肌后束", "肩外旋肌群"],
+      "category": "activate", "difficulty": 2, "equipment": ["弹力带"],
+      "cues": ["弹力带固定于面部高度", "肘高于腕，向面部拉动", "顶峰用力挤压肩胛骨"],
+      "commonErrors": ["耸肩", "用腰代偿", "只用手臂不用背部"],
+      "contraindications": ["肩部急性疼痛"],
+      "videos": ["vid-face-pull"], "source": "康复训练/运动损伤分析"
+    },
+    {
+      "id": "ex-bulgarian-split-squat", "name": "保加利亚分腿蹲",
+      "targetMuscles": ["股四头肌", "臀大肌", "臀中肌"],
+      "category": "strength", "difficulty": 3, "equipment": ["长凳"],
+      "cues": ["后脚脚背搭在凳上", "前膝与脚尖方向一致，不内扣", "下蹲时躯干直立，前大腿近水平"],
+      "commonErrors": ["前膝内扣", "重心前倾"],
+      "contraindications": ["膝关节急性疼痛", "髋部不稳"],
+      "videos": [], "source": "康复训练/运动损伤分析"
+    },
+    {
+      "id": "ex-single-leg-rdl", "name": "单腿罗马尼亚硬拉",
+      "targetMuscles": ["腘绳肌", "臀大肌", "臀中肌"],
+      "category": "strength", "difficulty": 3, "equipment": ["哑铃/壶铃"],
+      "cues": ["单手持重，对侧腿向后伸直", "以髋为轴俯身，背部挺直", "保持骨盆水平不翻转，腘绳肌有拉伸感"],
+      "commonErrors": ["骨盆翻转", "弓背", "速度过快"],
+      "contraindications": ["髋部不稳", "腘绳肌拉伤恢复期"],
+      "videos": [], "source": "康复训练/运动损伤分析"
+    },
+    {
+      "id": "ex-pallof-press", "name": "Pallof 推举",
+      "targetMuscles": ["腹横肌", "腹斜肌", "核心抗旋转"],
+      "category": "stability", "difficulty": 2, "equipment": ["绳索/弹力带"],
+      "cues": ["侧向站于固定点，双手胸前持绳", "收紧核心，抵抗旋转力向前推出", "全程躯干静止，训练「刹车」能力"],
+      "commonErrors": ["躯干旋转", "手臂发力代替核心"],
+      "contraindications": ["核心/腰椎急性疼痛"],
+      "videos": [], "source": "康复训练/运动损伤分析"
+    },
+    {
+      "id": "ex-thoracic-rotation", "name": "跪姿胸椎旋转",
+      "targetMuscles": ["胸椎", "腹斜肌"],
+      "category": "mobility", "difficulty": 1, "equipment": [],
+      "cues": ["四足跪姿，一手扶头", "上侧肩向天花板转动胸椎", "骨盆保持不动，感受上背旋转"],
+      "commonErrors": ["用腰部旋转", "肩颈代偿"],
+      "contraindications": ["胸椎急性疼痛"],
+      "videos": ["vid-thoracic-rotation"], "source": "康复训练/运动损伤分析"
+    },
+    {
+      "id": "ex-cat-cow", "name": "猫驼式",
+      "targetMuscles": ["胸椎", "脊柱活动度"],
+      "category": "mobility", "difficulty": 1, "equipment": [],
+      "cues": ["四足跪姿，吸气塌腰抬头", "呼气弓背低头", "缓慢逐节活动脊柱"],
+      "commonErrors": ["只在腰椎活动", "动作过快"],
+      "contraindications": ["颈椎/腰椎急性疼痛"],
+      "videos": [], "source": "康复训练/运动损伤分析"
+    },
+    {
+      "id": "ex-hip-flexor-stretch", "name": "跪姿髋屈肌拉伸",
+      "targetMuscles": ["髂腰肌", "股直肌"],
+      "category": "mobility", "difficulty": 1, "equipment": ["垫子"],
+      "cues": ["单膝跪地，骨盆后倾收紧臀部", "重心前移，感受前侧髋部拉伸", "保持 30 秒"],
+      "commonErrors": ["塌腰、骨盆前倾"],
+      "contraindications": ["髋部急性疼痛"],
+      "videos": [], "source": "康复训练/运动损伤分析"
+    },
+    {
+      "id": "ex-doorway-pec-stretch", "name": "门框胸肌拉伸",
+      "targetMuscles": ["胸大肌", "胸小肌"],
+      "category": "mobility", "difficulty": 1, "equipment": ["门框"],
+      "cues": ["手臂贴门框，肘 90 度", "身体前倾，感受胸部拉伸", "保持 30 秒"],
+      "commonErrors": ["耸肩", "拉伸过猛"],
+      "contraindications": ["肩部急性疼痛"],
+      "videos": [], "source": "康复训练/运动损伤分析"
+    },
+    {
+      "id": "ex-single-leg-squat", "name": "单腿深蹲",
+      "targetMuscles": ["股四头肌", "臀中肌", "核心"],
+      "category": "strength", "difficulty": 3, "equipment": [],
+      "cues": ["单腿站立，另一腿前伸", "缓慢下蹲，膝盖对准脚尖", "保持骨盆水平，控制稳定"],
+      "commonErrors": ["骨盆侧倾", "膝盖内扣", "晃动幅度大"],
+      "contraindications": ["膝关节急性疼痛"],
+      "videos": ["vid-single-leg-squat-test"], "source": "康复训练/运动损伤分析"
+    },
+    {
+      "id": "ex-bird-dog", "name": "鸟狗式",
+      "targetMuscles": ["深层核心", "臀大肌", "脊柱稳定"],
+      "category": "stability", "difficulty": 2, "equipment": [],
+      "cues": ["四足跪姿，核心收紧", "对侧手脚同时伸直", "保持脊柱稳定不塌腰"],
+      "commonErrors": ["塌腰", "旋转骨盆"],
+      "contraindications": ["腰椎急性疼痛"],
+      "videos": [], "source": "HYROX 伤病预防"
+    },
+    {
+      "id": "ex-chin-tuck", "name": "下巴回收",
+      "targetMuscles": ["颈深屈肌"],
+      "category": "activate", "difficulty": 1, "equipment": [],
+      "cues": ["坐直，目视前方", "下巴水平后收（做双下巴）", "保持 5 秒，感受颈后伸展"],
+      "commonErrors": ["低头前伸", "耸肩"],
+      "contraindications": ["颈椎急性疼痛"],
+      "videos": [], "source": "HYROX 伤病预防"
+    },
+    {
+      "id": "ex-glute-lunge", "name": "弓步与臀中肌控制",
+      "targetMuscles": ["臀中肌", "臀大肌"],
+      "category": "strength", "difficulty": 2, "equipment": [],
+      "cues": ["前膝不超脚尖，重心居中", "膝盖方向与脚尖一致"],
+      "commonErrors": ["前膝内扣", "重心过度偏移"],
+      "contraindications": ["膝关节急性疼痛"],
+      "videos": [], "source": "HYROX 伤病预防"
+    }
+  ]
+}

@@ -1,0 +1,277 @@
+{
+  "conditions": [
+    {
+      "id": "cond-ankle-dorsiflex-right",
+      "name": "右脚踝背屈受限",
+      "aliases": ["踝背屈受限", "脚踝活动度不足", "右脚踝旧伤后遗症", "jiǎobèiqū"],
+      "regions": ["region-ankle-right"],
+      "system": "musculoskeletal",
+      "symptoms": "深蹲时右脚后跟容易翘起；跑步后感觉右侧发力更费力；久站或上下楼时右小腿前侧紧张、右踝有卡顿感。",
+      "description": "踝背屈是脚背向小腿靠拢的能力，是一切承重动作（走、跑、蹲）的基础。旧伤（崴脚）后韧带与本体感觉受损，常遗留背屈活动度不足，成为全身代偿的起点。",
+      "selfTest": {
+        "exists": true,
+        "steps": ["脚后跟贴地，膝盖朝脚尖方向前移去触墙（膝触墙测试）", "记录膝盖到墙的距离：若非对称一侧明显更近，或脚跟翘起，提示背屈受限", "双侧对比，右侧更差即确认"],
+        "video": ["vid-ankle-dorsiflex-test"]
+      },
+      "redFlags": ["踝关节急性肿胀、瘀青", "完全无法负重行走", "夜间静息痛 —— 需就医排除骨折/韧带撕裂"],
+      "rehabExercises": ["ex-knee-to-wall", "ex-calf-foamroll"],
+      "prevention": ["ex-calf-foamroll", "ex-knee-to-wall"],
+      "upstreamCauses": [],
+      "downstreamSymptoms": [
+        { "conditionId": "cond-pelvic-rotation", "note": "踝背屈受限→足外旋代偿→上方骨盆旋转" },
+        { "conditionId": "cond-knee-instability-right", "note": "→膝外翻负荷，右膝不稳" },
+        { "conditionId": "cond-snapping-hip-left", "note": "→骨盆代偿→左侧弹响髋" }
+      ],
+      "source": "09-康复训练/运动损伤分析及训练计划",
+      "tags": ["动力链源头", "踝", "代偿"],
+      "disclaimer": "本内容仅供自我健康管理参考，不构成医疗诊断；如有不适请就医。"
+    },
+    {
+      "id": "cond-pelvic-rotation",
+      "name": "骨盆旋转",
+      "aliases": ["骨盆旋倾", "骨盆扭转", "骨盆不平衡", "gǔpénxuánzhuǎn"],
+      "regions": ["region-pelvis"],
+      "system": "musculoskeletal",
+      "symptoms": "骨盆左前旋、右后倾；站立时一侧髋高、一侧髋低；单腿支撑时骨盆下沉（特伦德伦伯格）；久坐后腰部不对称酸胀。",
+      "description": "骨盆通常是**下游反应**而非病根：源于一侧下肢失稳（如右踝受限→右臀中肌薄弱），身体为维持平衡让另一侧代偿前旋。",
+      "selfTest": {
+        "exists": true,
+        "steps": ["自然站立，双手放骨盆两侧，观察两侧髂嵴是否一高一低", "单腿站立，观察对侧骨盆是否明显下沉", "仰卧做死虫式，观感骨盆是否保持稳定"],
+        "video": []
+      },
+      "redFlags": ["伴下肢麻木/无力", "腰痛放射到腿 —— 需就医排查腰椎/神经"],
+      "rehabExercises": ["ex-dead-bug", "ex-clamshell", "ex-pallof-press", "ex-bird-dog"],
+      "prevention": ["ex-clamshell", "ex-side-lying-abduction"],
+      "upstreamCauses": [
+        { "conditionId": "cond-ankle-dorsiflex-right", "note": "右踝受限→右臀中肌薄弱→骨盆失稳" }
+      ],
+      "downstreamSymptoms": [
+        { "conditionId": "cond-snapping-hip-left", "note": "左髋前旋→髋屈肌缩短→弹响" },
+        { "conditionId": "cond-knee-instability-right", "note": "骨盆不稳→单腿下蹲晃动" },
+        { "conditionId": "cond-thoracic-shift-right", "note": "骨盆旋转→胸椎代偿性右移" }
+      ],
+      "source": "09-康复训练/运动损伤分析及训练计划",
+      "tags": ["动力链中点", "骨盆"],
+      "disclaimer": "本内容仅供自我健康管理参考，不构成医疗诊断；如有不适请就医。"
+    },
+    {
+      "id": "cond-snapping-hip-left",
+      "name": "左侧弹响髋",
+      "aliases": ["弹响髋症候群", "髋关节弹响", "snapping hip", "tánxiǎngkuān"],
+      "regions": ["region-hip-left"],
+      "system": "musculoskeletal",
+      "symptoms": "死虫式/屈髋时左侧髋关节『咯噔』弹响；久坐后髋前侧紧张；一般无痛，偶有酸胀。",
+      "description": "紧张的髂腰肌/阔筋膜张肌腱束在股骨大转子上滑过产生的弹响。多非左髋本身问题，而是骨盆为代偿对侧失衡而产生的继发表现——只做拉伸往往治标不治本。",
+      "selfTest": {
+        "exists": true,
+        "steps": ["仰卧屈髋做死虫式，感受弹响位置", "侧卧做髋外展，感受是否仍弹响", "触诊大转子附近，感受肌腱滑过的『咯噔』"],
+        "video": []
+      },
+      "redFlags": ["弹响伴明显疼痛或红肿", "有卡锁、无法负重", "弹响伴大腿无力 —— 需就医"],
+      "rehabExercises": ["ex-hip-flexor-stretch", "ex-clamshell", "ex-single-leg-rdl"],
+      "prevention": ["ex-clamshell", "ex-side-lying-abduction"],
+      "upstreamCauses": [
+        { "conditionId": "cond-pelvic-rotation", "note": "左髋前旋→髋屈肌缩短→弹响" },
+        { "conditionId": "cond-ankle-dorsiflex-right", "note": "右踝受限→骨盆代偿→左侧旋前" }
+      ],
+      "downstreamSymptoms": [],
+      "source": "09-康复训练/运动损伤分析及训练计划",
+      "tags": ["弹响髋", "髋", "动力链下游"],
+      "disclaimer": "本内容仅供自我健康管理参考，不构成医疗诊断；如有不适请就医。"
+    },
+    {
+      "id": "cond-knee-instability-right",
+      "name": "右膝关节不稳定",
+      "aliases": ["膝关节不稳", "单腿下蹲晃动", "膝外翻", "xīguānjiébùwěn"],
+      "regions": ["region-knee-right"],
+      "system": "musculoskeletal",
+      "symptoms": "单腿深蹲时晃动厉害；下蹲时膝盖容易内扣；跑步后右膝内侧不适；上下楼梯感觉膝盖『要打软』。",
+      "description": "单腿支撑不稳的核心是骨盆稳定肌（臀中肌）薄弱，支撑腿无法稳定骨盆，下方膝关节只能在晃动中找平衡。属于骨盆/踝功能障碍向下传导的表现。",
+      "selfTest": {
+        "exists": true,
+        "steps": ["单腿站立，观察对侧骨盆是否下沉（特伦德伦伯格征）", "缓慢单腿深蹲，观察膝盖是否内扣、晃动是否剧烈", "与对侧比较，明显更差即确认"],
+        "video": ["vid-single-leg-squat-test"]
+      },
+      "redFlags": ["伴明显肿胀积液", "有卡锁/屈伸受限", "外伤后无法负重 —— 需就医排查半月板/韧带/ACL"],
+      "rehabExercises": ["ex-single-leg-squat", "ex-bulgarian-split-squat", "ex-single-leg-rdl", "ex-clamshell"],
+      "prevention": ["ex-single-leg-rdl", "ex-clamshell"],
+      "upstreamCauses": [
+        { "conditionId": "cond-pelvic-rotation", "note": "骨盆不稳→单腿支撑失衡" },
+        { "conditionId": "cond-ankle-dorsiflex-right", "note": "右踝受限→膝外翻负荷" }
+      ],
+      "downstreamSymptoms": [],
+      "source": "09-康复训练/运动损伤分析及训练计划",
+      "tags": ["膝", "稳定", "动力链下游"],
+      "disclaimer": "本内容仅供自我健康管理参考，不构成医疗诊断；如有不适请就医。"
+    },
+    {
+      "id": "cond-thoracic-shift-right",
+      "name": "胸椎右移",
+      "aliases": ["胸椎侧移", "胸廓不对称", "上背偏离", "xiōngzhuīyòuyí"],
+      "regions": ["region-thoracic-spine"],
+      "system": "musculoskeletal",
+      "symptoms": "自然站立时胸廓/肩线偏向一侧；上背部一侧更紧；久坐后上背酸胀、转动不畅。",
+      "description": "动力链耦合运动：骨盆向左旋转（左髋前）时，为保持肩与视线朝前，胸椎自然向反方向（右侧）侧移/旋转。不良坐姿会固化这一由下而上的趋势。",
+      "selfTest": {
+        "exists": true,
+        "steps": ["自然站立对镜，观察两侧肩峰是否一高一低/胸廓是否偏向一侧", "坐姿做胸椎旋转，比较两侧活动度是否不对称"],
+        "video": []
+      },
+      "redFlags": ["伴脊柱侧弯明显加重", "伴下肢麻木无力 —— 需就医"],
+      "rehabExercises": ["ex-thoracic-rotation", "ex-cat-cow", "ex-ytw"],
+      "prevention": ["ex-thoracic-rotation", "ex-cat-cow"],
+      "upstreamCauses": [
+        { "conditionId": "cond-pelvic-rotation", "note": "骨盆旋转→胸椎代偿性右移" }
+      ],
+      "downstreamSymptoms": [
+        { "conditionId": "cond-scapular-weakness-right", "note": "→右侧菱形肌/下斜方神经抑制、薄弱" }
+      ],
+      "source": "09-康复训练/运动损伤分析及训练计划",
+      "tags": ["胸椎", "代偿", "动力链中游"],
+      "disclaimer": "本内容仅供自我健康管理参考，不构成医疗诊断；如有不适请就医。"
+    },
+    {
+      "id": "cond-scapular-weakness-right",
+      "name": "右侧菱形肌 / 下斜方肌薄弱",
+      "aliases": ["肩胛稳定肌无力", "右侧上背薄弱", "肩胛失能", "jiānjiǎbóruò"],
+      "regions": ["region-scapula-right"],
+      "system": "musculoskeletal",
+      "symptoms": "做划船后右侧上背『不酸』或发力感弱；含胸圆肩；单手负重时右侧肩胛容易晃动、不稳定。",
+      "description": "这不是单纯『力量小』，而是一种神经抑制模式：在从足部开始的错误力线下，右侧肩胛稳定肌被系统『关闭』。要激活它，须先纠正骨盆与胸椎位置。",
+      "selfTest": {
+        "exists": true,
+        "steps": ["俯卧做 Y-T-W（拇指朝上），比较两侧肩胛收拢的发力感", "若右侧明显乏力/不受控，提示右侧稳定肌抑制"],
+        "video": ["vid-ytw"]
+      },
+      "redFlags": ["伴肩部明显疼痛或上举受限", "伴手臂麻木 —— 需就医"],
+      "rehabExercises": ["ex-ytw", "ex-band-face-pull", "ex-band-external-rotation", "ex-pallof-press"],
+      "prevention": ["ex-band-face-pull", "ex-band-external-rotation", "ex-ytw"],
+      "upstreamCauses": [
+        { "conditionId": "cond-thoracic-shift-right", "note": "胸椎右移→右侧肩胛稳定肌被拉长/抑制" },
+        { "conditionId": "cond-pelvic-rotation", "note": "后表斜向经线锚点松动（右臀弱→右上背弱）" }
+      ],
+      "downstreamSymptoms": [
+        { "conditionId": "cond-humeral-anterior-glide", "note": "→内旋肌占优→肱骨前移/圆肩" }
+      ],
+      "source": "09-康复训练/运动损伤分析及训练计划",
+      "tags": ["肩胛", "抑制", "动力链上游"],
+      "disclaimer": "本内容仅供自我健康管理参考，不构成医疗诊断；如有不适请就医。"
+    },
+    {
+      "id": "cond-humeral-anterior-glide",
+      "name": "肱骨前移",
+      "aliases": ["肱骨前移", "圆肩", "肱骨前滑", "gōnggǔqiányí"],
+      "regions": ["region-shoulder-right", "region-shoulder-left"],
+      "system": "musculoskeletal",
+      "symptoms": "肩关节前方鼓起、上臂呈内旋位；靠墙站时上臂远离墙面；穿衣服/举手时肩膀前侧紧张。",
+      "description": "当拮抗的外旋肌群（冈下肌、小圆肌）与肩胛后缩肌群（菱形肌、下斜方肌）薄弱时，内旋肌群（胸肌、背阔肌）占主导，将肱骨拉向前内方，形成圆肩含胸。在你这儿被整条动力链放大。",
+      "selfTest": {
+        "exists": true,
+        "steps": ["靠墙自然站立，观察上臂是否贴墙（前移则远离墙）", "仰卧，肩峰是否明显前移、肩关节前方是否鼓起"],
+        "video": []
+      },
+      "redFlags": ["伴肩部锐痛、夜间痛加重", "上举/外展明显受限或无力 --- 需就医排除肩袖/撞击"],
+      "rehabExercises": ["ex-band-external-rotation", "ex-band-face-pull", "ex-doorway-pec-stretch", "ex-ytw"],
+      "prevention": ["ex-band-external-rotation", "ex-band-face-pull"],
+      "upstreamCauses": [
+        { "conditionId": "cond-scapular-weakness-right", "note": "肩胛稳定肌弱→外旋/后缩不足→肱骨前移" },
+        { "conditionId": "cond-thoracic-shift-right", "note": "胸椎右移→上背失稳→圆肩" }
+      ],
+      "downstreamSymptoms": [],
+      "source": "09-康复训练/运动损伤分析及训练计划",
+      "tags": ["肩", "圆肩", "动力链末端"],
+      "disclaimer": "本内容仅供自我健康管理参考，不构成医疗诊断；如有不适请就医。"
+    },
+    {
+      "id": "cond-runner-knee",
+      "name": "跑步膝（髌股关节疼痛）",
+      "aliases": ["髌股关节疼痛综合征", "PFPS", "膝前痛", "runner's knee", "pǎobùxī"],
+      "regions": ["region-knee-right", "region-knee-left"],
+      "system": "musculoskeletal",
+      "symptoms": "上下楼、久坐屈膝、跑步后膝前侧或髌骨周围疼痛；蹲起时膝前发酸。",
+      "description": "髌股关节负荷过大常见于跑步人群，与下肢力线、臀中肌力量、踝背屈相关。",
+      "redFlags": ["明显肿胀积液", "无法负重", "卡锁/不稳 --- 需就医"],
+      "rehabExercises": ["ex-glute-lunge", "ex-single-leg-squat", "ex-bulgarian-split-squat"],
+      "prevention": ["ex-single-leg-rdl", "ex-clamshell"],
+      "upstreamCauses": [
+        { "conditionId": "cond-ankle-dorsiflex-right", "note": "踝背屈受限→下肢力线改变→髌股负荷" }
+      ],
+      "downstreamSymptoms": [],
+      "source": "12-HYROX训练/HYROX 常见伤病预防",
+      "tags": ["膝", "跑步"],
+      "disclaimer": "本内容仅供自我健康管理参考，不构成医疗诊断；如有不适请就医。"
+    },
+    {
+      "id": "cond-itb",
+      "name": "髂胫束综合征",
+      "aliases": ["ITBS", "髂胫束摩擦综合征", "膝外侧痛", "qiàjìngshù"],
+      "regions": ["region-knee-left", "region-hip-left"],
+      "system": "musculoskeletal",
+      "symptoms": "跑步后膝外侧疼痛；下坡、长距离后加重；外侧大腿紧张。",
+      "description": "髂胫束在股骨外髁处摩擦产生的膝外侧疼痛，常见于跑者，与髋外展/臀部力量及跑量相关。",
+      "redFlags": ["明显肿胀", "无法跑步或负重 --- 需就医"],
+      "rehabExercises": ["ex-calf-foamroll", "ex-cat-cow", "ex-side-lying-abduction"],
+      "prevention": ["ex-side-lying-abduction", "ex-single-leg-rdl"],
+      "upstreamCauses": [],
+      "downstreamSymptoms": [],
+      "source": "训练术语/髂胫束综合征",
+      "tags": ["膝外侧", "跑步"],
+      "disclaimer": "本内容仅供自我健康管理参考，不构成医疗诊断；如有不适请就医。"
+    },
+    {
+      "id": "cond-shoulder-impingement",
+      "name": "肩峰撞击综合征",
+      "aliases": ["肩峰撞击", "肩部撞击", "jiānfēngzhuàngjī"],
+      "regions": ["region-shoulder-right", "region-shoulder-left"],
+      "system": "musculoskeletal",
+      "symptoms": "上举、推举、过头动作时肩前侧疼痛；夜间侧卧压到患侧疼痛；手臂外展上抬到一定角度『卡痛』。",
+      "description": "肩峰下间隙内软组织被挤压，常见于推举、SkiErg、Wall Ball 等过头动作人群，与肩胛稳定、胸椎活动度相关。",
+      "redFlags": ["外伤后剧痛、畸形", "明显无力、活动受限 --- 需就医排查肩袖撕裂"],
+      "rehabExercises": ["ex-band-external-rotation", "ex-band-face-pull", "ex-doorway-pec-stretch", "ex-ytw"],
+      "prevention": ["ex-band-external-rotation", "ex-band-face-pull"],
+      "upstreamCauses": [
+        { "conditionId": "cond-humeral-anterior-glide", "note": "肱骨前移→肩峰下间隙变窄→撞击" }
+      ],
+      "downstreamSymptoms": [],
+      "source": "训练术语/肩峰撞击",
+      "tags": ["肩", "过头动作"],
+      "disclaimer": "本内容仅供自我健康管理参考，不构成医疗诊断；如有不适请就医。"
+    },
+    {
+      "id": "cond-plantar-fasciitis",
+      "name": "足底筋膜炎",
+      "aliases": ["足底筋膜", "足跟痛", "zúdǐjīnmóyán"],
+      "regions": ["region-ankle-right", "region-ankle-left"],
+      "system": "musculoskeletal",
+      "symptoms": "晨起第一步足底/足跟刺痛；久站久走后加重；休息后缓解。",
+      "description": "足底筋膜在足跟附着处反复牵拉产生的炎症，与小腿紧张、足弓、跑量与鞋有关。",
+      "redFlags": ["红肿热痛", "外伤后畸形", "夜间持续痛 --- 需就医"],
+      "rehabExercises": ["ex-calf-foamroll", "ex-knee-to-wall"],
+      "prevention": ["ex-calf-foamroll", "ex-knee-to-wall"],
+      "upstreamCauses": [],
+      "downstreamSymptoms": [],
+      "source": "训练术语/足底筋膜炎（待补）",
+      "tags": ["足底", "跑步"],
+      "disclaimer": "本内容仅供自我健康管理参考，不构成医疗诊断；如有不适请就医。"
+    },
+    {
+      "id": "cond-low-back-pain",
+      "name": "下背痛（腰肌劳损）",
+      "aliases": ["腰痛", "腰椎劳损", "腰肌劳损", "yāotòng"],
+      "regions": ["region-lumbar"],
+      "system": "musculoskeletal",
+      "symptoms": "久坐后腰部酸胀；硬拉、深蹲、推雪橇（Sled）等负重后腰痛；弯腰受限。",
+      "description": "常见于负重训练与久坐人群，核心稳定、脊柱中立控制是关键，常见于 Sled Push/Pull、Sandbag Lunges、Wall Balls 等站。",
+      "redFlags": ["腰痛伴下肢麻木/无力", "大小便异常", "夜间静息痛 --- 需立即就医"],
+      "rehabExercises": ["ex-dead-bug", "ex-bird-dog", "ex-pallof-press", "ex-cat-cow"],
+      "prevention": ["ex-bird-dog", "ex-dead-bug"],
+      "upstreamCauses": [
+        { "conditionId": "cond-pelvic-rotation", "note": "骨盆旋转→腰椎代偿性负荷" }
+      ],
+      "downstreamSymptoms": [],
+      "source": "12-HYROX训练/HYROX 常见伤病预防",
+      "tags": ["腰椎", "负重"],
+      "disclaimer": "本内容仅供自我健康管理参考，不构成医疗诊断；如有不适请就医。"
+    }
+  ]
+}
