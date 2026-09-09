@@ -2,14 +2,13 @@
   <view class="container">
     <!-- 头部 -->
     <view class="head">
-      <text class="eyebrow">MUSCLE ATLAS</text>
       <text class="title">人体肌肉库</text>
-      <text class="sub">从真实解剖数据抽取，标准名称 + 系统部位。点任一肌肉看详情，并跳到该部位的伤病。</text>
+      <text class="sub">按标准名称与身体部位浏览。选择肌肉后可查看基础信息，并进入相关身体问题。</text>
     </view>
 
     <!-- 搜索 -->
     <view class="search-wrap">
-      <text class="search-icon">🔍</text>
+      <PhMagnifyingGlass class="search-icon" :size="18" />
       <input class="search-input" v-model="query" placeholder="搜肌肉名，如 gluteus / rhomboid / tibialis" />
     </view>
 
@@ -70,6 +69,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
+import { PhMagnifyingGlass } from '@phosphor-icons/vue'
 import muscles from '../../../content/muscles.json'
 
 const query = ref('')
@@ -135,16 +135,15 @@ function goConditionFor(m) {
 
 <style scoped>
 .head { padding: 8rpx 0 16rpx; }
-.eyebrow { font-size: 22rpx; letter-spacing: 3px; color: #2b7876; font-weight: 600; text-transform: uppercase; display: block; }
-.title { font-size: 40rpx; font-weight: 800; color: #1f1f1f; display: block; margin-top: 6rpx; }
+.title { font-size: 40rpx; font-weight: 800; color: #1f1f1f; display: block; }
 .sub { font-size: 24rpx; color: #7a7a7a; line-height: 1.6; display: block; margin-top: 8rpx; }
 
 .search-wrap { display: flex; align-items: center; background: #fff; border-radius: 14px; padding: 16rpx 24rpx; }
-.search-icon { margin-right: 12rpx; font-size: 28rpx; }
+.search-icon { margin-right: 12rpx; color: var(--color-teal-700); }
 .search-input { flex: 1; font-size: 28rpx; color: #1f1f1f; }
 
 .region-row { display: flex; flex-wrap: wrap; gap: 10rpx; margin: 18rpx 0 10rpx; }
-.reg-chip { padding: 10rpx 20rpx; border-radius: 999rpx; font-size: 24rpx; background: #fff; color: #4a4a4a; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.reg-chip { min-height: 44px; padding: 0 12px; display: inline-flex; align-items: center; border-radius: 999rpx; font-size: 24rpx; background: #fff; color: #4a4a4a; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
 .reg-chip.on { background: #2b7876; color: #fff; }
 
 .section-sub { font-size: 24rpx; color: #8a8a8a; margin: 4rpx 0 14rpx; }
@@ -154,7 +153,7 @@ function goConditionFor(m) {
 .grp-label { font-size: 28rpx; font-weight: 700; color: #1f6f6d; }
 .grp-count { font-size: 22rpx; color: #9b9b9b; }
 
-.m-row { display: flex; align-items: center; justify-content: space-between; background: #fff; border-radius: 12rpx; padding: 16rpx 20rpx; margin-bottom: 8rpx; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.m-row { min-height: 64px; display: flex; align-items: center; justify-content: space-between; background: #fff; border-radius: 12rpx; padding: 12px 14px; margin-bottom: 8rpx; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
 .m-main { flex: 1; }
 .m-name { font-size: 26rpx; font-weight: 600; color: #1f1f1f; display: block; }
 .m-meta { font-size: 22rpx; color: #8a8a8a; margin-top: 3rpx; display: block; }
@@ -165,7 +164,7 @@ function goConditionFor(m) {
 .detail { margin-top: 20rpx; background: #fff; border-radius: 16px; padding: 20px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-top: 4px solid #2b7876; }
 .d-head { display: flex; align-items: flex-start; justify-content: space-between; }
 .d-name { font-size: 20px; font-weight: 800; color: #1f1f1f; }
-.d-close { color: #b0b0b0; font-size: 24px; padding: 0 4px; }
+.d-close { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #b0b0b0; font-size: 24px; }
 .d-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
 .d-cell { background: #f5f5f3; border-radius: 10px; padding: 8px 14px; min-width: 76px; }
 .d-k { font-size: 11px; color: #9b9b9b; display: block; }

@@ -1,205 +1,118 @@
 <template>
-  <view class="container">
-    <!-- 头部 -->
-    <view class="head">
-      <text class="eyebrow">MY BODY PROFILE</text>
-      <text class="title">我的身体档案</text>
-      <text class="sub">选中你存在的问题，平台会把它们串成一条个人动力链，并汇总你需要练的动作。</text>
-    </view>
-
-    <!-- 当前训练状态 & 入口 -->
-    <view class="plan-link" @tap="goPlan">
-      <view class="pl-left">
-        <text class="pl-kicker">当前安排</text>
-        <text class="pl-title">胸/腿/背 · 一周六练 · 减脂期</text>
-        <text class="pl-sub">每日热身 + 功能性训练 + 减脂有氧 →</text>
-      </view>
-      <text class="pl-arrow">训练计划</text>
-    </view>
-
-    <!-- 快捷操作 -->
-    <view class="quick-row">
-      <view class="chip primary" @tap="loadFlagship">载入我的动力链</view>
-      <view class="chip" @tap="clearAll">清空</view>
-    </view>
-
-    <!-- 我的问题：多选 -->
-    <view class="section-title">我的问题</view>
-    <view class="section-sub">已选 {{ selected.length }} / {{ conditions.length }} 个</view>
-    <view class="cond-grid">
-      <view
-        v-for="c in conditions"
-        :key="c.id"
-        class="cond-chip"
-        :class="{ on: selected.includes(c.id) }"
-        @tap="toggle(c.id)"
-      >
-        <text class="cc-name">{{ c.name }}</text>
-        <text v-if="selected.includes(c.id)" class="cc-check">✓</text>
-      </view>
-    </view>
-
-    <!-- 个人动力链 -->
-    <view class="section-title">你的动力链</view>
-    <view class="section-sub">从根因到下游的网络图，点任意节点看它的上下游与原因</view>
-    <view class="card chain-card">
-      <ChainMap :edges="edges" />
-      <view v-if="isolated.length" class="iso">
-        <view class="section-sub">其它已选问题（暂未串联）</view>
-        <view v-for="id in isolated" :key="id" class="iso-row" @tap="goCond(id)">
-          <text class="iso-name">{{ condName(id) }}</text>
-          <text class="iso-arrow">↗</text>
+  <view class="workspace-page">
+    <view class="workspace-main">
+      <view class="page-header chain-header">
+        <view>
+          <text class="page-title">动力链</text>
+          <text class="page-subtitle">把已知限制、可能的动作调整与相关表现放在同一条观察路径上。</text>
+          <view class="local-note"><PhShieldCheck :size="15" weight="fill" /> 关联是整理线索，不是自动诊断</view>
         </view>
       </view>
-    </view>
 
-    <!-- 汇总训练清单 -->
-    <view class="section-title">你的康复 / 预防清单</view>
-    <view class="section-sub progress">
-      <text>已完成 {{ doneCount }} / {{ trainList.length }} 个动作</text>
-      <view class="bar"><view class="bar-fill" :style="{ width: percent + '%' }"></view></view>
-    </view>
-    <ExerciseCard
-      v-for="ex in trainList"
-      :key="ex.id"
-      :exercise="ex"
-      trackable
-      :done="doneSet.has(ex.id)"
-      @update:done="toggleDone(ex.id, $event)"
-    />
+      <view class="chain-actions">
+        <view class="secondary-button" @tap="loadExample"><PhSparkle :size="17" weight="fill" /> 载入示例</view>
+        <view v-if="selectedConditionIds.length" class="ghost-button" @tap="confirmClear"><PhTrash :size="17" /> 清空当前</view>
+      </view>
 
-    <view class="disclaimer">
-      打卡仅用于记录自己的训练进度，不构成医疗建议；如症状持续或加重请及时就医。
+      <view v-if="selectedConditions.length" class="selected-strip">
+        <view v-for="condition in selectedConditions" :key="condition.id" class="selected-chip">
+          <text>{{ condition.name }}</text>
+          <view class="chip-remove" :aria-label="`移除${condition.name}`" @tap="toggleCondition(condition.id)"><PhX :size="13" weight="bold" /></view>
+        </view>
+        <view class="add-chip" @tap="goBody"><PhPlus :size="14" weight="bold" /> 添加</view>
+      </view>
+
+      <view class="section-heading">
+        <view><text class="section-title">观察路径</text><text class="section-note">点击节点后，下方或右侧立即显示关系说明</text></view>
+      </view>
+      <ChainMap :edges="edges" :selected-ids="selectedConditionIds" />
+
+      <template v-if="trainList.length">
+        <view class="section-heading">
+          <view><text class="section-title">关联训练清单</text><text class="section-note">已完成 {{ completedInList }} / {{ trainList.length }} · 已合并重复动作</text></view>
+          <view class="training-link" @tap="goTraining">全部训练 <PhArrowRight :size="15" /></view>
+        </view>
+        <view class="progress-bar"><view :style="{ width: progressPercent + '%' }"></view></view>
+        <ExerciseCard
+          v-for="exercise in trainList"
+          :key="exercise.id"
+          :exercise="exercise"
+          trackable
+          :done="completedSet.has(exercise.id)"
+          @update:done="toggleExercise(exercise.id, $event)"
+        />
+      </template>
+
+      <view v-else-if="!selectedConditionIds.length" class="setup-card surface-card">
+        <PhListChecks :size="30" weight="duotone" />
+        <text class="setup-title">从你的真实关注开始</text>
+        <text class="setup-copy">首次打开保持空白。你可以自己选择问题，或载入现有个人链作为示例再编辑。</text>
+        <view class="primary-button" @tap="goBody">选择身体问题</view>
+      </view>
+
+      <view class="legal-note">动力链中的关系按“个人观察 / 资料支持 / 需验证”标注。跨部位相关不等于因果。</view>
     </view>
+    <AppNav current="chain" />
   </view>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { onLoad } from '@dcloudio/uni-app'
+import { computed } from 'vue'
+import {
+  PhArrowRight,
+  PhListChecks,
+  PhPlus,
+  PhShieldCheck,
+  PhSparkle,
+  PhTrash,
+  PhX,
+} from '@phosphor-icons/vue'
+import AppNav from '../../components/AppNav.vue'
 import ChainMap from '../../components/ChainMap.vue'
 import ExerciseCard from '../../components/ExerciseCard.vue'
-import {
-  db, FLAGSHIP_CHAIN, chainEdges, aggregateExerciseIds, getExercise,
-} from '../../data/index.js'
+import { aggregateExerciseIds, chainEdges, getCondition, getExercise } from '../../data/index.js'
+import { useWorkspace } from '../../stores/workspace.js'
 
-const STORE_COND = 'profile-conditions'
-const STORE_DONE = 'profile-done-exercises'
+const {
+  selectedConditionIds,
+  completedSet,
+  toggleCondition,
+  toggleExercise,
+  loadExample,
+  clearWorkspace,
+} = useWorkspace()
 
-const conditions = db.conditions
-const selected = ref([])
-const doneArr = ref([])
+const selectedConditions = computed(() => selectedConditionIds.value.map(getCondition).filter(Boolean))
+const edges = computed(() => chainEdges(selectedConditionIds.value))
+const trainList = computed(() => aggregateExerciseIds(selectedConditionIds.value).map(getExercise).filter(Boolean))
+const completedInList = computed(() => trainList.value.filter((item) => completedSet.value.has(item.id)).length)
+const progressPercent = computed(() => trainList.value.length ? Math.round((completedInList.value / trainList.value.length) * 100) : 0)
 
-onLoad(() => {
-  const saved = uni.getStorageSync(STORE_COND)
-  // 仅当「从未设置」时回退到旗舰动力链；显式清空（[]）也要尊重
-  selected.value = Array.isArray(saved) ? saved : [...FLAGSHIP_CHAIN]
-  const sd = uni.getStorageSync(STORE_DONE)
-  doneArr.value = Array.isArray(sd) ? sd : []
-})
-
-const doneSet = computed(() => new Set(doneArr.value))
-
-function persistCond() { uni.setStorageSync(STORE_COND, selected.value) }
-function persistDone() { uni.setStorageSync(STORE_DONE, doneArr.value) }
-
-function toggle(id) {
-  const i = selected.value.indexOf(id)
-  if (i >= 0) selected.value.splice(i, 1)
-  else selected.value.push(id)
-  persistCond()
-}
-function loadFlagship() {
-  selected.value = [...FLAGSHIP_CHAIN]
-  persistCond()
-}
-function clearAll() {
-  selected.value = []
-  persistCond()
-}
-
-const edges = computed(() => chainEdges(selected.value))
-const isolated = computed(() => {
-  const inEdge = new Set()
-  edges.value.forEach((e) => { inEdge.add(e.from); inEdge.add(e.to) })
-  return selected.value.filter((id) => !inEdge.has(id))
-})
-const trainList = computed(() =>
-  aggregateExerciseIds(selected.value).map((id) => getExercise(id)).filter(Boolean)
-)
-const doneCount = computed(() => trainList.value.filter((e) => doneSet.value.has(e.id)).length)
-const percent = computed(() =>
-  trainList.value.length ? Math.round((doneCount.value / trainList.value.length) * 100) : 0
-)
-
-function toggleDone(id, val) {
-  const i = doneArr.value.indexOf(id)
-  if (val && i < 0) doneArr.value.push(id)
-  if (!val && i >= 0) doneArr.value.splice(i, 1)
-  persistDone()
-}
-function goPlan() {
-  uni.navigateTo({ url: '/pages/plan/plan' })
-}
-function condName(id) {
-  const c = db.conditions.find((x) => x.id === id)
-  return c ? c.name : id
-}
-function goCond(id) {
-  uni.navigateTo({ url: '/pages/condition/condition?id=' + id })
+function goBody() { uni.reLaunch({ url: '/pages/body/body' }) }
+function goTraining() { uni.reLaunch({ url: '/pages/training/training' }) }
+function confirmClear() {
+  uni.showModal({
+    title: '清空当前工作台？',
+    content: '将清空已关注问题和动作打卡；旧版本数据不会被修改。',
+    confirmText: '清空',
+    confirmColor: '#984d43',
+    success: ({ confirm }) => { if (confirm) clearWorkspace() },
+  })
 }
 </script>
 
 <style scoped>
-.head { padding: 8rpx 0 18rpx; }
-.eyebrow {
-  font-size: 22rpx; letter-spacing: 3px; color: #2b7876; font-weight: 600;
-  text-transform: uppercase; display: block;
-}
-.title { font-size: 40rpx; font-weight: 800; color: #1f1f1f; display: block; margin-top: 6rpx; }
-.sub { font-size: 25rpx; color: #7a7a7a; line-height: 1.6; display: block; margin-top: 8rpx; }
-
-.plan-link {
-  display: flex; align-items: center; justify-content: space-between;
-  background: linear-gradient(100deg, #174a48, #2b7876);
-  border-radius: 16px; padding: 20rpx 26rpx; margin: 14rpx 0 10rpx;
-  box-shadow: 0 2px 10px rgba(23, 74, 72, 0.25);
-}
-.pl-kicker { font-size: 20rpx; letter-spacing: 2px; color: #bcd6d4; text-transform: uppercase; display: block; }
-.pl-title { font-size: 28rpx; font-weight: 800; color: #fff; display: block; margin-top: 4rpx; }
-.pl-sub { font-size: 21rpx; color: #cfe3e1; margin-top: 4rpx; display: block; }
-.pl-arrow { font-size: 23rpx; color: #fff; font-weight: 600; background: rgba(255,255,255,0.18); padding: 8rpx 18rpx; border-radius: 999rpx; }
-
-.quick-row { display: flex; gap: 12rpx; margin: 10rpx 0 4rpx; }
-.chip {
-  padding: 12rpx 26rpx; border-radius: 999rpx; font-size: 25rpx; font-weight: 600;
-  background: #fff; color: #4a4a4a; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-.chip.primary { background: #2b7876; color: #fff; }
-
-.section-title { font-size: 30rpx; font-weight: 700; color: #1f1f1f; margin: 28rpx 0 6rpx; }
-.section-sub { font-size: 24rpx; color: #8a8a8a; margin-bottom: 12rpx; }
-
-.cond-grid { display: flex; flex-wrap: wrap; gap: 12rpx; }
-.cond-chip {
-  display: flex; align-items: center; gap: 10rpx;
-  padding: 14rpx 22rpx; border-radius: 12rpx; background: #fff;
-  font-size: 25rpx; color: #4a4a4a; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-}
-.cond-chip.on { background: #e4f0ef; color: #1f6f6d; font-weight: 600; }
-.cc-check { color: #2b7876; font-weight: 700; }
-
-.chain-card { padding: 8rpx 12rpx 14rpx; }
-.iso { margin-top: 16rpx; border-top: 1px solid #f2f2f2; padding-top: 12rpx; }
-.iso-row { display: flex; align-items: center; justify-content: space-between; padding: 12rpx 4rpx; border-top: 1px solid #f7f7f7; }
-.iso-name { font-size: 25rpx; font-weight: 600; color: #1f1f1f; }
-.iso-arrow { color: #2b7876; font-size: 24rpx; }
-
-.progress { display: flex; align-items: center; gap: 16rpx; }
-.bar {
-  flex: 1; height: 12rpx; border-radius: 999rpx; background: #e3e8e7; overflow: hidden;
-}
-.bar-fill { height: 100%; border-radius: 999rpx; background: #2b7876; transition: width 0.3s; }
-
-.disclaimer { margin-top: 36rpx; font-size: 22rpx; color: #b0b0b0; line-height: 1.6; text-align: center; }
+.chain-header { margin-bottom: 13px; }
+.chain-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.selected-strip { margin-top: 14px; display: flex; gap: 7px; overflow-x: auto; scrollbar-width: none; }
+.selected-chip,
+.add-chip { min-height: 44px; padding: 0 0 0 12px; display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto; color: var(--color-teal-700); background: var(--color-teal-050); border-radius: 999px; font-size: 11px; font-weight: 680; }
+.chip-remove { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+.add-chip { padding: 0 14px; color: var(--color-text-secondary); background: var(--color-surface); border: 1px solid var(--border-soft); }
+.training-link { min-height: 44px; display: flex; align-items: center; gap: 5px; color: var(--color-teal-700); font-size: 11px; font-weight: 720; }
+.progress-bar { height: 7px; margin: -2px 0 13px; overflow: hidden; background: #dedfd9; border-radius: 999px; }
+.progress-bar view { height: 100%; background: var(--color-teal-500); border-radius: 999px; transition: width 200ms ease; }
+.setup-card { margin-top: 24px; padding: 28px 22px; display: flex; flex-direction: column; align-items: center; color: var(--color-teal-700); text-align: center; }
+.setup-title { display: block; margin-top: 9px; color: var(--color-text); font-size: 19px; font-weight: 770; }
+.setup-copy { display: block; max-width: 460px; margin: 7px 0 17px; color: var(--color-text-secondary); font-size: 12px; line-height: 1.6; }
 </style>

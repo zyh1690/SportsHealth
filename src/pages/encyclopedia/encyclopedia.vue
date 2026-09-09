@@ -2,7 +2,7 @@
   <view class="container">
     <!-- 搜索 -->
     <view class="search-wrap">
-      <text class="search-icon">🔍</text>
+      <PhMagnifyingGlass class="search-icon" :size="18" />
       <input class="search-input" v-model="query" placeholder="搜伤病：如 跑步膝 / 腰痛 / 骨盆旋转" />
     </view>
 
@@ -21,6 +21,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { PhMagnifyingGlass } from '@phosphor-icons/vue'
 import ConditionCard from '../../components/ConditionCard.vue'
 import { db, searchConditions } from '../../data/index.js'
 
@@ -38,7 +39,7 @@ const list = computed(() => {
   display: flex; align-items: center; background: #fff; border-radius: 14px;
   padding: 16rpx 24rpx; margin-top: 10rpx;
 }
-.search-icon { margin-right: 12rpx; font-size: 28rpx; }
+.search-icon { margin-right: 12rpx; color: var(--color-teal-700); }
 .search-input { flex: 1; font-size: 28rpx; color: #1f1f1f; }
 .quick { margin: 20rpx 0 8rpx; }
 .empty { text-align: center; color: #b5b5b5; font-size: 26rpx; padding: 60rpx 0; }

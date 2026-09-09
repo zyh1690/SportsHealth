@@ -8,11 +8,18 @@ import exercisesData from '../../content/exercises.json'
 import videosData from '../../content/videos.json'
 import planData from '../../content/plan.json'
 import musclesData from '../../content/muscles.json'
+import exerciseGuidanceData from '../../content/exercise-guidance.json'
+
+const guidanceMap = Object.fromEntries(exerciseGuidanceData.guidance.map((item) => [item.id, item]))
+const enrichedExercises = exercisesData.exercises.map((exercise) => ({
+  ...exercise,
+  ...(guidanceMap[exercise.id] || {}),
+}))
 
 export const db = {
   regions: regionsData.regions,
   conditions: conditionsData.conditions,
-  exercises: exercisesData.exercises,
+  exercises: enrichedExercises,
   videos: videosData.videos,
   plan: planData,
   muscles: musclesData.muscles,
@@ -63,22 +70,13 @@ export function resolveLink(link) {
 }
 
 /** 展开一个伤病关联到的动作对象列表 */
-export function resolveExercises(ids, memo = {}) {
+export function resolveExercises(ids) {
   return ids.map((id) => exerciseMap[id]).filter(Boolean)
 }
 
-/** 我的身体档案默认载入的旗舰动力链（你自己的问题：右脚踝→…→肱骨前移） */
-export const FLAGSHIP_CHAIN = [
-  'cond-ankle-dorsiflex-right',
-  'cond-pelvic-rotation',
-  'cond-thoracic-shift-right',
-  'cond-scapular-weakness-right',
-  'cond-humeral-anterior-glide',
-]
-
 /**
  * 动力链子图：只看「用户已选伤病集合内部」的有向关联（上下游）。
- * 返回 [{ from, to, note }]，方向 = from → to（from 是上游/根因，to 是下游症状）。
+ * 返回 [{ from, to, note, status }]。方向只用于组织观察顺序，不声明因果。
  */
 export function chainEdges(selectedIds) {
   const sel = new Set(selectedIds)
@@ -89,7 +87,7 @@ export function chainEdges(selectedIds) {
     for (const l of c.downstreamSymptoms || []) {
       if (sel.has(l.conditionId)) {
         const k = id + '>' + l.conditionId
-        if (!edgesMap.has(k)) edgesMap.set(k, { from: id, to: l.conditionId, note: l.note })
+        if (!edgesMap.has(k)) edgesMap.set(k, { from: id, to: l.conditionId, note: l.note, status: l.status || 'needs-validation', reference: l.reference })
       }
     }
   }
@@ -100,9 +98,9 @@ export function chainEdges(selectedIds) {
  * 在链子图中找「最长主链」（节点数最多的有向路径）。
  * 小规模图直接 DFS 枚举足够，用于把用户的问题串成一条主线展示。
  */
-export function findSpine(edges) {
+export function findSpine(edges, selectedIds = []) {
   const adj = {}
-  const nodes = new Set()
+  const nodes = new Set(selectedIds)
   for (const e of edges) {
     nodes.add(e.from); nodes.add(e.to)
     ;(adj[e.from] ||= []).push(e.to)
@@ -110,11 +108,13 @@ export function findSpine(edges) {
   let best = []
   function dfs(node, path) {
     if (path.length > best.length) best = [...path]
-    for (const n of adj[node] || []) {
+    const nextIds = [...(adj[node] || [])].sort((a, b) => (conditionMap[a]?.name || a).localeCompare(conditionMap[b]?.name || b, 'zh-CN'))
+    for (const n of nextIds) {
       if (!path.includes(n)) dfs(n, [...path, n])
     }
   }
-  for (const n of nodes) dfs(n, [n])
+  const orderedNodes = [...nodes].sort((a, b) => (conditionMap[a]?.name || a).localeCompare(conditionMap[b]?.name || b, 'zh-CN'))
+  for (const n of orderedNodes) dfs(n, [n])
   return best
 }
 
@@ -128,4 +128,34 @@ export function aggregateExerciseIds(conditionIds) {
     ;(c.prevention || []).forEach((x) => ids.add(x))
   }
   return [...ids]
+}
+
+/** 去重取得一个星期计划块中的全部动作。 */
+export function exerciseIdsForPlanDay(day) {
+  if (!day) return []
+  return [...new Set([...(day.warmup || []), ...(day.functional || []).map((item) => item.id)])]
+}
+
+/** 当前关注动作优先，并补充当天星期计划；Today 与 Training 共用。 */
+export function currentSessionExerciseIds(conditionIds, day) {
+  return [...new Set([...aggregateExerciseIds(conditionIds), ...exerciseIdsForPlanDay(day)])]
+}
+
+/** 合并康复与日常维护动作，并保留每个动作承担的角色。 */
+export function conditionExerciseRoles(condition) {
+  const roles = new Map()
+  for (const id of condition?.rehabExercises || []) {
+    roles.set(id, { id, role: '重点练习' })
+  }
+  for (const id of condition?.prevention || []) {
+    const current = roles.get(id)
+    roles.set(id, { id, role: current ? '重点练习 · 日常维护' : '日常维护' })
+  }
+  return [...roles.values()]
+}
+
+export function assetUrl(path) {
+  if (!path) return ''
+  const base = import.meta.env.BASE_URL || '/'
+  return `${base}${path.replace(/^\//, '')}`
 }

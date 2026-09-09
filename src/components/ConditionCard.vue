@@ -1,36 +1,60 @@
 <template>
-  <view class="cond-card" @tap="open">
-    <view class="row">
-      <text class="name">{{ condition.name }}</text>
-      <text class="count">{{ condition.rehabExercises.length }} 个动作</text>
+  <view class="condition-card">
+    <view class="condition-open" @tap="open">
+      <view class="condition-copy">
+        <view class="condition-title-row">
+          <text class="condition-name">{{ condition.name }}</text>
+          <text class="condition-count">{{ actionCount }} 个动作</text>
+        </view>
+        <text class="condition-aliases">{{ condition.aliases?.slice(0, 2).join(' · ') }}</text>
+        <text class="condition-symptom">{{ condition.symptoms }}</text>
+      </view>
+      <PhCaretRight :size="18" aria-hidden="true" />
     </view>
-    <text v-if="condition.aliases && condition.aliases.length" class="aliases">
-      {{ condition.aliases.slice(0, 3).join(' · ') }}
-    </text>
-    <text class="symptom">{{ condition.symptoms }}</text>
+    <view
+      v-if="selectable"
+      class="select-action"
+      :class="{ selected }"
+      :aria-label="selected ? '从我的关注中移除' : '加入我的关注'"
+      @tap="emit('toggle', condition.id)"
+    >
+      <PhCheck v-if="selected" :size="16" weight="bold" />
+      <PhPlus v-else :size="16" weight="bold" />
+      {{ selected ? '已关注' : '加入关注' }}
+    </view>
   </view>
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import { PhCaretRight, PhCheck, PhPlus } from '@phosphor-icons/vue'
+
 const props = defineProps({
   condition: { type: Object, required: true },
+  selectable: { type: Boolean, default: false },
+  selected: { type: Boolean, default: false },
 })
-function open() {
-  uni.navigateTo({ url: '/pages/condition/condition?id=' + props.condition.id })
-}
+const emit = defineEmits(['toggle'])
+const actionCount = computed(() => new Set([...(props.condition.rehabExercises || []), ...(props.condition.prevention || [])]).size)
+function open() { uni.navigateTo({ url: `/pages/condition/condition?id=${props.condition.id}` }) }
 </script>
 
 <style scoped>
-.cond-card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 16px 18px;
-  margin-bottom: 12px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+.condition-card {
+  margin-bottom: 11px;
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
 }
-.row { display: flex; align-items: baseline; justify-content: space-between; }
-.name { font-size: 17px; font-weight: 600; color: #1f1f1f; }
-.count { font-size: 12px; color: #9b9b9b; }
-.aliases { display: block; font-size: 12px; color: #8a8a8a; margin: 4px 0 6px; }
-.symptom { font-size: 13px; color: #4a4a4a; line-height: 1.5; display: block; }
+.condition-open { min-height: 108px; padding: 15px; display: flex; align-items: center; gap: 10px; }
+.condition-copy { min-width: 0; flex: 1; }
+.condition-title-row { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.condition-name { color: var(--color-text); font-size: 16px; font-weight: 760; }
+.condition-count { flex: 0 0 auto; color: var(--color-teal-700); font-size: 10px; font-weight: 700; }
+.condition-aliases { display: block; margin-top: 3px; color: var(--color-text-muted); font-size: 10px; }
+.condition-symptom { display: -webkit-box; margin-top: 7px; overflow: hidden; color: var(--color-text-secondary); font-size: 12px; line-height: 1.55; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.select-action { min-height: 44px; display: flex; align-items: center; justify-content: center; gap: 6px; color: var(--color-teal-700); background: #f7f5ef; border-top: 1px solid var(--border-soft); font-size: 12px; font-weight: 720; }
+.select-action.selected { color: #fff; background: var(--color-teal-700); }
 </style>

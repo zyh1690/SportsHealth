@@ -1,155 +1,216 @@
 <template>
-  <view class="container">
-    <!-- 顶部标题 + 搜索 -->
-    <view class="header">
-      <text class="brand">运动康复</text>
-      <view class="search" @tap="goEncyclopedia">
-        <text class="search-icon">🔍</text>
-        <text class="search-ph">搜伤病，如「跑步膝 / 腰痛」</text>
+  <view class="workspace-page">
+    <view class="workspace-main today-main">
+      <view class="page-header today-header">
+        <view>
+          <text class="date-label">{{ dateLabel }}</text>
+          <text class="page-title">今日工作台</text>
+          <view class="local-note"><PhLockKey :size="14" weight="fill" /> 你的选择与打卡只保存在本机</view>
+        </view>
+        <view class="progress-ring" :style="progressStyle">
+          <view class="progress-inner"><text>{{ progressPercent }}%</text></view>
+        </view>
       </view>
+
+      <view v-if="!selectedConditions.length" class="empty-state onboarding">
+        <view class="onboarding-icon"><PhPersonArmsSpread :size="34" weight="duotone" /></view>
+        <text class="empty-state-title">先建立你的关注清单</text>
+        <text class="empty-state-copy">选择想跟踪的身体问题后，这里会整理下一步动作、训练进度和可能的动力链关联。</text>
+        <view class="empty-actions">
+          <view class="primary-button" @tap="goBody"><PhPlus :size="18" weight="bold" /> 选择身体问题</view>
+          <view class="secondary-button" @tap="loadExample">载入示例</view>
+        </view>
+        <text class="example-note">示例仅用于演示整理方式；载入后仍可编辑，不代表你的身体情况。</text>
+      </view>
+
+      <template v-else>
+        <view v-if="!isRecoveryDay && nextExercise" class="next-card surface-card">
+          <view class="next-media">
+            <image :src="assetUrl(nextExercise.image)" :alt="nextExercise.imageAlt" mode="aspectFill" />
+            <view class="next-badge">下一步 · 约 {{ estimatedMinutes }} 分钟</view>
+          </view>
+          <view class="next-content">
+            <text class="next-kicker">从一个动作开始</text>
+            <text class="next-name">{{ nextExercise.name }}</text>
+            <text class="next-purpose">{{ nextExercise.purpose }}</text>
+            <view class="next-dose"><PhTimer :size="17" /> {{ nextExercise.dosage }}</view>
+            <view class="next-actions">
+              <view class="primary-button" @tap="toggleExercise(nextExercise.id, true)">
+                <PhCheckCircle :size="19" weight="fill" /> 完成并继续
+              </view>
+              <view class="ghost-button" @tap="goTraining">查看动作</view>
+            </view>
+          </view>
+        </view>
+
+        <view v-else-if="isRecoveryDay" class="celebration surface-card">
+          <PhMoonStars :size="38" weight="duotone" />
+          <view><text class="celebration-title">今天以恢复为主</text><text class="celebration-copy">保留轻松活动和日常观察，不为了补课堆叠训练量。</text></view>
+        </view>
+
+        <view v-else class="celebration surface-card">
+          <PhCheckCircle :size="38" weight="duotone" />
+          <view><text class="celebration-title">当前清单已完成</text><text class="celebration-copy">今天可以专注恢复，或到“训练”里回看动作。</text></view>
+        </view>
+
+        <view class="today-grid">
+          <view>
+            <view class="section-heading">
+              <view><text class="section-title">当前关注</text><text class="section-note">{{ selectedConditions.length }} 个问题 · 点击查看详情</text></view>
+              <view class="text-action" @tap="goBody">编辑</view>
+            </view>
+            <view class="focus-list surface-card">
+              <view v-for="condition in focusPreview" :key="condition.id" class="focus-row" @tap="goCondition(condition.id)">
+                <view class="focus-marker"></view>
+                <view class="focus-copy"><text class="focus-name">{{ condition.name }}</text><text class="focus-tag">{{ condition.tags?.[0] || '观察项' }}</text></view>
+                <PhCaretRight :size="17" />
+              </view>
+              <view v-if="selectedConditions.length > focusPreview.length" class="focus-more" @tap="goBody">
+                查看全部 {{ selectedConditions.length }} 项
+              </view>
+            </view>
+          </view>
+
+          <view>
+            <view class="section-heading">
+              <view><text class="section-title">可能的关联路径</text><text class="section-note">用于组织观察，不等于原因判定</text></view>
+              <view class="text-action" @tap="goChain">展开</view>
+            </view>
+            <view class="mini-chain surface-card">
+              <template v-for="(condition, index) in chainPreview" :key="condition.id">
+                <view class="mini-node"><text>{{ index + 1 }}</text><view><text class="mini-name">{{ condition.name }}</text><text class="mini-status">{{ index === 0 ? '已记录' : '需验证' }}</text></view></view>
+                <PhArrowDown v-if="index < chainPreview.length - 1" :key="condition.id + '-arrow'" class="mini-arrow" :size="18" />
+              </template>
+              <text v-if="chainPreview.length < selectedConditions.length" class="mini-more">另有 {{ selectedConditions.length - chainPreview.length }} 项，请在动力链页查看</text>
+            </view>
+          </view>
+        </view>
+
+        <view class="section-heading">
+          <view><text class="section-title">今日训练</text><text class="section-note">{{ todayPlanLabel }}</text></view>
+          <view class="text-action" @tap="goTraining">进入训练</view>
+        </view>
+        <view class="session-strip surface-card" @tap="goTraining">
+          <view class="session-icon"><PhBarbell :size="24" weight="duotone" /></view>
+          <view class="session-copy"><text class="session-title">{{ todayPlanTitle }}</text><text class="session-sub">{{ todaySessionSubtitle }}</text></view>
+          <PhArrowRight :size="20" weight="bold" />
+        </view>
+      </template>
+
+      <view class="legal-note">自我记录不能替代诊断。出现急性肿胀、无法负重、进行性无力或麻木等情况，请及时就医。</view>
     </view>
-
-    <!-- 我的身体档案入口 -->
-    <view class="profile-entry" @tap="goProfile">
-      <view class="pe-left">
-        <text class="pe-title">我的身体档案</text>
-        <text class="pe-sub">选你的问题 · 追溯整条个人动力链 · 动作打卡</text>
-      </view>
-      <text class="pe-arrow">→</text>
-    </view>
-
-    <!-- 人体图选点 -->
-    <view class="atlas-card">
-      <view class="atlas-head">
-        <text class="atlas-title">人体组织图 2D</text>
-        <text class="atlas-sub">{{ view === 'front' ? 'ANTERIOR VIEW' : 'POSTERIOR VIEW' }}</text>
-      </view>
-
-      <view class="layer-switch">
-        <view class="layer-btn" :class="{ on: layer === 'region' }" @tap="layer = 'region'">部位</view>
-        <view class="layer-btn" :class="{ on: layer === 'muscle' }" @tap="layer = 'muscle'">肌肉</view>
-      </view>
-
-      <view class="atlas-body">
-        <text class="atlas-hint">{{ layer === 'muscle' ? '点击 · 看肌肉' : '点击标记 · 探索身体' }}</text>
-        <BodyMap :regions="layer === 'muscle' ? muscleRegions : regions" :view="view" :width="250" :layer="layer" @open="onOpen" @muscle="onMuscle" class="atlas-map" />
-      </view>
-
-      <view class="view-switch">
-        <view class="view-btn" :class="{ on: view === 'front' }" @tap="view = 'front'">正面</view>
-        <view class="view-btn" :class="{ on: view === 'back' }" @tap="view = 'back'">背面</view>
-      </view>
-
-      <text class="attribution">人体图：AI 生成教学模型 · 示意非精确解剖</text>
-    </view>
-
-    <!-- 功能性训练入口 -->
-    <view class="section-title">我的训练 · 按计划</view>
-    <view class="section-sub">胸 / 腿 / 背 三分化 · 每周六练 · 减脂有氧</view>
-    <view class="persona-row">
-      <view class="persona-chip" @tap="goPlan">
-        <text>我的训练计划</text>
-      </view>
-      <view class="persona-chip" @tap="goMuscle">
-        <text>人体肌肉库</text>
-      </view>
-    </view>
-
-    <view class="disclaimer">
-      本内容仅供自我健康管理与运动参考，不构成医学诊断/治疗建议；如有不适请及时就医。
-    </view>
+    <AppNav current="today" />
   </view>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import BodyMap from '../../components/BodyMap.vue'
-import { db, muscleCountByRegion, muscleKeyByRegionId } from '../../data/index.js'
+import { computed } from 'vue'
+import {
+  PhArrowDown,
+  PhArrowRight,
+  PhBarbell,
+  PhCaretRight,
+  PhCheckCircle,
+  PhLockKey,
+  PhMoonStars,
+  PhPersonArmsSpread,
+  PhPlus,
+  PhTimer,
+} from '@phosphor-icons/vue'
+import AppNav from '../../components/AppNav.vue'
+import { assetUrl, chainEdges, currentSessionExerciseIds, findSpine, getCondition, getExercise } from '../../data/index.js'
+import { useWorkspace } from '../../stores/workspace.js'
+import plan from '../../../content/plan.json'
 
-const regions = db.regions
-const view = ref('front')
-const layer = ref('region')
-const muscleRegions = computed(() => db.regions.filter((r) => muscleCountByRegion[r.id]))
+const { selectedConditionIds, completedSet, toggleExercise, loadExample } = useWorkspace()
+const selectedConditions = computed(() => selectedConditionIds.value.map(getCondition).filter(Boolean))
+const focusPreview = computed(() => selectedConditions.value.slice(0, 3))
 
-function onOpen(id) {
-  uni.navigateTo({ url: '/pages/region/region?id=' + id })
-}
-function onMuscle(id) {
-  const key = muscleKeyByRegionId[id]
-  uni.navigateTo({ url: '/pages/muscle/muscle' + (key ? '?region=' + key : '') })
-}
-function goEncyclopedia() {
-  uni.navigateTo({ url: '/pages/encyclopedia/encyclopedia' })
-}
-function goPlan() {
-  uni.navigateTo({ url: '/pages/plan/plan' })
-}
-function goMuscle() {
-  uni.navigateTo({ url: '/pages/muscle/muscle' })
-}
-function goProfile() {
-  uni.navigateTo({ url: '/pages/profile/profile' })
-}
+const now = new Date()
+const dateLabel = new Intl.DateTimeFormat('zh-CN', { month: 'long', day: 'numeric', weekday: 'long' }).format(now)
+const weekdayIndex = now.getDay()
+const isRecoveryDay = weekdayIndex === 0
+const todayPlan = computed(() => weekdayIndex === 0 ? null : plan.days[weekdayIndex - 1])
+const sessionExerciseIds = computed(() => selectedConditions.value.length && !isRecoveryDay
+  ? currentSessionExerciseIds(selectedConditionIds.value, todayPlan.value)
+  : [])
+const nextExercise = computed(() => sessionExerciseIds.value.map(getExercise).find((item) => item && !completedSet.value.has(item.id)))
+const completedCount = computed(() => sessionExerciseIds.value.filter((id) => completedSet.value.has(id)).length)
+const progressPercent = computed(() => sessionExerciseIds.value.length ? Math.round((completedCount.value / sessionExerciseIds.value.length) * 100) : 0)
+const progressStyle = computed(() => ({ background: `conic-gradient(var(--color-teal-500) ${progressPercent.value}%, #dedfd9 0)` }))
+const estimatedMinutes = computed(() => Math.max(3, Math.min(8, Math.ceil((nextExercise.value?.difficulty || 1) * 2.5))))
+const todayPlanTitle = computed(() => todayPlan.value ? `${todayPlan.value.day} · ${todayPlan.value.split}日` : '周日 · 恢复日')
+const todayPlanLabel = computed(() => todayPlan.value ? '按当前示例计划整理' : '轻松活动，留意整体恢复')
+const todayExerciseCount = computed(() => sessionExerciseIds.value.length)
+const todaySessionSubtitle = computed(() => todayPlan.value ? `${todayExerciseCount.value} 个准备与控制动作` : '轻松活动与恢复提醒')
+
+const chainPreview = computed(() => {
+  const spine = findSpine(chainEdges(selectedConditionIds.value))
+  const ids = spine.length ? spine : selectedConditionIds.value
+  return ids.slice(0, 4).map(getCondition).filter(Boolean)
+})
+
+function goBody() { uni.reLaunch({ url: '/pages/body/body' }) }
+function goChain() { uni.reLaunch({ url: '/pages/profile/profile' }) }
+function goTraining() { uni.reLaunch({ url: '/pages/training/training' }) }
+function goCondition(id) { uni.navigateTo({ url: `/pages/condition/condition?id=${id}` }) }
 </script>
 
 <style scoped>
-.header { padding: 8rpx 0 20rpx; }
-.brand { font-size: 40rpx; font-weight: 800; color: #1f1f1f; }
-.search {
-  margin-top: 18rpx; display: flex; align-items: center;
-  background: #fff; border-radius: 999rpx; padding: 14rpx 24rpx;
-}
-.search-icon { margin-right: 12rpx; font-size: 26rpx; }
-.search-ph { color: #a9a9a9; font-size: 25rpx; }
+.date-label { display: block; margin-bottom: 7px; color: var(--color-teal-700); font-size: 13px; font-weight: 700; }
+.progress-ring { width: 56px; height: 56px; padding: 5px; flex: 0 0 56px; border-radius: 50%; }
+.progress-inner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: var(--color-bg); border-radius: 50%; color: var(--color-teal-700); font-size: 11px; font-weight: 750; }
+.onboarding { margin-top: 28px; }
+.onboarding-icon { width: 62px; height: 62px; margin: 0 auto 14px; display: flex; align-items: center; justify-content: center; color: var(--color-teal-700); background: var(--color-teal-050); border-radius: 20px; }
+.empty-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 9px; }
+.example-note { display: block; margin-top: 12px; color: var(--color-text-muted); font-size: 10px; line-height: 1.5; }
+.next-card { overflow: hidden; }
+.next-media { position: relative; height: 220px; }
+.next-media image { width: 100%; height: 100%; display: block; }
+.next-badge { position: absolute; left: 14px; top: 14px; padding: 7px 10px; color: #fff; background: rgba(18, 63, 62, 0.88); border-radius: 999px; backdrop-filter: blur(8px); font-size: 11px; font-weight: 700; }
+.next-content { padding: 18px; }
+.next-kicker { display: block; color: var(--color-teal-700); font-size: 11px; font-weight: 750; }
+.next-name { display: block; margin-top: 4px; color: var(--color-text); font-size: 25px; line-height: 1.25; font-weight: 800; letter-spacing: -0.025em; }
+.next-purpose { display: block; margin-top: 7px; color: var(--color-text-secondary); font-size: 13px; line-height: 1.6; }
+.next-dose { margin-top: 11px; display: flex; align-items: center; gap: 7px; color: var(--color-teal-700); font-size: 12px; font-weight: 680; }
+.next-actions { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+.celebration { padding: 20px; display: flex; align-items: center; gap: 14px; color: var(--color-teal-700); }
+.celebration-title { display: block; color: var(--color-text); font-size: 17px; font-weight: 760; }
+.celebration-copy { display: block; margin-top: 4px; color: var(--color-text-secondary); font-size: 12px; }
+.text-action { min-height: 44px; display: flex; align-items: center; color: var(--color-teal-700); font-size: 12px; font-weight: 720; }
+.focus-list { overflow: hidden; }
+.focus-row { min-height: 62px; padding: 10px 14px; display: flex; align-items: center; gap: 11px; border-top: 1px solid var(--border-soft); }
+.focus-row:first-child { border-top: 0; }
+.focus-marker { width: 9px; height: 9px; flex: 0 0 9px; background: var(--color-teal-500); border-radius: 50%; box-shadow: 0 0 0 5px var(--color-teal-050); }
+.focus-copy { min-width: 0; flex: 1; }
+.focus-name { display: block; font-size: 13px; font-weight: 720; }
+.focus-tag { display: block; margin-top: 3px; color: var(--color-text-muted); font-size: 10px; }
+.focus-more { min-height: 44px; display: flex; align-items: center; justify-content: center; color: var(--color-teal-700); border-top: 1px solid var(--border-soft); font-size: 11px; font-weight: 720; }
+.mini-chain { padding: 15px; }
+.mini-node { min-height: 48px; padding: 8px 10px; display: flex; align-items: center; gap: 11px; background: #f7f5ef; border-radius: 13px; }
+.mini-node > text { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; color: var(--color-teal-700); background: var(--color-teal-100); border-radius: 50%; font-size: 10px; font-weight: 800; }
+.mini-name { display: block; font-size: 12px; font-weight: 710; }
+.mini-status { display: block; margin-top: 2px; color: var(--color-text-muted); font-size: 9px; }
+.mini-arrow { display: block; margin: 3px 0 3px 13px; color: var(--color-teal-500); }
+.mini-more { display: block; margin-top: 10px; color: var(--color-text-muted); font-size: 10px; text-align: center; }
+.session-strip { min-height: 78px; padding: 14px; display: flex; align-items: center; gap: 12px; }
+.session-icon { width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; flex: 0 0 46px; color: var(--color-teal-700); background: var(--color-teal-050); border-radius: 14px; }
+.session-copy { min-width: 0; flex: 1; }
+.session-title { display: block; font-size: 14px; font-weight: 750; }
+.session-sub { display: block; margin-top: 3px; color: var(--color-text-muted); font-size: 11px; }
 
-.profile-entry {
-  display: flex; align-items: center; justify-content: space-between;
-  background: linear-gradient(100deg, #174a48, #2b7876);
-  border-radius: 16px; padding: 22rpx 26rpx; margin: 4rpx 0 20rpx;
-  box-shadow: 0 2px 10px rgba(23, 74, 72, 0.25);
+@media (min-width: 700px) {
+  .next-card { display: grid; grid-template-columns: minmax(280px, 1.1fr) minmax(320px, 0.9fr); }
+  .next-media { height: 100%; min-height: 310px; }
+  .next-content { padding: 30px; align-self: center; }
+  .today-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
 }
-.pe-title { font-size: 32rpx; font-weight: 800; color: #fff; display: block; }
-.pe-sub { font-size: 22rpx; color: #cfe3e1; margin-top: 4rpx; display: block; }
-.pe-arrow { color: #fff; font-size: 34rpx; }
 
-.atlas-card {
-  background: #fff; border-radius: 16px; padding: 16px 18px 14px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-}
-.atlas-head { margin-bottom: 6px; }
-.atlas-title { font-size: 17px; font-weight: 700; color: #1f1f1f; display: block; }
-.atlas-sub {
-  font-size: 12px; letter-spacing: 1px; color: #9b9b9b;
-  text-transform: uppercase; margin-top: 4rpx; display: block;
-}
-.atlas-body { position: relative; }
-.layer-switch { display: flex; width: max-content; margin: 4px auto 8px; background: #eceeec; border-radius: 999rpx; padding: 4px; gap: 4px; }
-.layer-btn { padding: 6px 24px; border-radius: 999rpx; font-size: 13px; color: #6a6a6a; }
-.layer-btn.on { background: #fff; color: #174a48; font-weight: 700; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-.atlas-hint {
-  position: absolute; left: 0; top: 50%;
-  transform: translateY(-50%) rotate(180deg);
-  writing-mode: vertical-lr;
-  font-size: 12px; color: #b5b5b5; letter-spacing: 3px; z-index: 1;
-}
-.atlas-map { margin-top: 6px; }
-
-.view-switch {
-  display: flex; width: max-content; margin: 12px auto 0;
-  background: #174a48; border-radius: 999rpx; padding: 4px; gap: 4px;
-  box-shadow: 0 2px 8px rgba(23, 74, 72, 0.25);
-}
-.view-btn { padding: 8px 28px; border-radius: 999rpx; font-size: 14px; color: #dfe9e8; }
-.view-btn.on { background: #2b7876; color: #fff; font-weight: 600; }
-.attribution { display: block; text-align: center; font-size: 11px; color: #c2c2c2; margin-top: 10px; }
-
-.persona-row { display: flex; flex-wrap: wrap; gap: 10px; }
-.persona-chip {
-  padding: 12px 22px; background: #fff; border-radius: 12px;
-  font-size: 14px; font-weight: 600; color: #2b7876;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-.disclaimer {
-  margin-top: 32rpx; font-size: 22rpx; color: #b0b0b0; line-height: 1.6; text-align: center;
+@media (max-width: 699px) {
+  .next-media { height: 180px; }
+  .next-content { padding: 15px 16px 16px; }
+  .next-name { font-size: 22px; }
+  .next-purpose { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+  .next-actions { margin-top: 13px; }
 }
 </style>

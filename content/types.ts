@@ -8,7 +8,7 @@
  *
  * 核心关系：
  *   BodyRegion ── Condition ── Exercise（康复 / 预防 / 计划）
- *   Condition ══>(有向关联)══> Condition   ← 动力链（上游根因 / 下游症状）
+ *   Condition ══>(有向观察关系)══> Condition   ← 动力链（不自动声明因果）
  *   Persona ── Program ── Exercise
  */
 
@@ -46,6 +46,13 @@ export interface ChainLink {
   conditionId: string;
   /** 关系说明：为什么上游/下游、机制是什么 */
   note: string;
+  /** 展示依据：个人记录、一般资料支持、仍需进一步验证 */
+  status: 'personal-observation' | 'source-supported' | 'needs-validation';
+  /** 仅当资料直接支持当前关联时提供，并允许标记为 source-supported */
+  reference?: {
+    name: string;
+    url: string;
+  };
 }
 
 /** 自测方法（可选字段：不是每种伤病都有可靠的自我检测） */
@@ -82,9 +89,9 @@ export interface Condition {
   /** 预防训练动作（Exercise id） */
   prevention: string[];
 
-  /** 动力链：上游根因（可能导致本症状更上游的问题） */
+  /** 动力链：展示在当前项之前的相关观察 */
   upstreamCauses: ChainLink[];
-  /** 动力链：下游症状（本问题可能引发的后续表现） */
+  /** 动力链：展示在当前项之后的相关观察 */
   downstreamSymptoms: ChainLink[];
   /** 弱关联 / 共病（无方向，常同时出现） */
   related?: ChainLink[];
@@ -110,8 +117,18 @@ export interface Exercise {
   /** 难度 1=入门 2=中等 3=进阶 */
   difficulty: 1 | 2 | 3;
   equipment: string[];          // 器械
+  image: string;
+  imageAlt: string;
+  purpose: string;
+  dosage: string;
+  side: string;
+  setup: string[];
   cues: string[];               // 动作要点
   commonErrors: string[];       // 常见错误
+  regression: string;
+  progression: string;
+  stopConditions: string[];
+  references: { name: string; url: string }[];
   contraindications: string[];  // 禁忌症 / 何时不要做
   videos: string[];             // Video id
   source?: string;

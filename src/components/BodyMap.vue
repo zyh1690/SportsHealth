@@ -31,6 +31,8 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue'
+import frontImage from '../static/body/anatomy/front.png'
+import backImage from '../static/body/anatomy/back.png'
 
 const IMG_W = 701 // 解剖图宽度（肌肉正面/背面图，与 content/regions.json 的热区坐标对应）
 const IMG_H = 1122 // 解剖图高度
@@ -47,7 +49,7 @@ const emit = defineEmits(['open', 'muscle'])
 const activeId = ref('')
 
 const imgSrc = computed(() =>
-  props.view === 'back' ? '/static/body/anatomy/back.png' : '/static/body/anatomy/front.png'
+  props.view === 'back' ? backImage : frontImage
 )
 const visibleRegions = computed(() =>
   props.regions.filter((r) => r.hotspot && r.hotspot[props.view])
@@ -68,11 +70,12 @@ function centerPx(h) {
 }
 function markerBoxStyle(r) {
   const { cx, cy, rad } = centerPx(r.hotspot[props.view])
+  const diameter = Math.max(rad * 2, 44)
   return {
-    left: cx - rad + 'px',
-    top: cy - rad + 'px',
-    width: rad * 2 + 'px',
-    height: rad * 2 + 'px',
+    left: cx - diameter / 2 + 'px',
+    top: cy - diameter / 2 + 'px',
+    width: diameter + 'px',
+    height: diameter + 'px',
   }
 }
 const labelStyle = computed(() => {
@@ -122,6 +125,7 @@ defineExpose({ setSelected })
 }
 .label {
   position: absolute; z-index: 3;
+  min-height: 44px;
   display: flex; align-items: center; gap: 6px;
   background: #ffffff; border-radius: 10px;
   padding: 7px 12px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);

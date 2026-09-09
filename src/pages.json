@@ -2,11 +2,23 @@
 	"pages": [
 		{
 			"path": "pages/index/index",
-			"style": { "navigationBarTitleText": "运动康复" }
+			"style": { "navigationStyle": "custom", "navigationBarTitleText": "今日" }
+		},
+		{
+			"path": "pages/body/body",
+			"style": { "navigationStyle": "custom", "navigationBarTitleText": "身体" }
+		},
+		{
+			"path": "pages/profile/profile",
+			"style": { "navigationStyle": "custom", "navigationBarTitleText": "动力链" }
+		},
+		{
+			"path": "pages/training/training",
+			"style": { "navigationStyle": "custom", "navigationBarTitleText": "训练" }
 		},
 		{
 			"path": "pages/encyclopedia/encyclopedia",
-			"style": { "navigationBarTitleText": "伤病百科" }
+			"style": { "navigationBarTitleText": "身体问题库" }
 		},
 		{
 			"path": "pages/plan/plan",
@@ -18,21 +30,17 @@
 		},
 		{
 			"path": "pages/condition/condition",
-			"style": { "navigationBarTitleText": "伤病详情" }
+			"style": { "navigationBarTitleText": "身体问题详情" }
 		},
 		{
 			"path": "pages/muscle/muscle",
 			"style": { "navigationBarTitleText": "人体肌肉库" }
-		},
-		{
-			"path": "pages/profile/profile",
-			"style": { "navigationBarTitleText": "我的身体档案" }
 		}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "运动康复 · 功能性训练",
-		"navigationBarBackgroundColor": "#F5F4F0",
-		"backgroundColor": "#F5F4F0"
+		"navigationBarBackgroundColor": "#F6F3EC",
+		"backgroundColor": "#F6F3EC"
 	}
 }
