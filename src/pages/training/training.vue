@@ -18,7 +18,8 @@
           <view class="summary-icon"><PhCalendarCheck :size="28" weight="duotone" /></view>
           <view class="summary-copy">
             <text class="summary-kicker">{{ selectedSplit.shortName }} · {{ todayDay.day }}</text>
-            <text class="summary-title">{{ todayDay.focus }} · {{ todayExercises.length }} 个支持动作</text>
+            <text class="summary-title">{{ todayDay.focus }}</text>
+            <text class="summary-count">{{ todayActionSummary }}</text>
             <text class="summary-note">{{ todayDay.target }}</text>
           </view>
         </view>
@@ -29,15 +30,27 @@
         </view>
 
         <template v-if="todayDay && !todayDay.isRest">
-          <view class="section-heading"><view><text class="section-title">今天的动作</text><text class="section-note">身体关注动作优先 · 状态按自然日记录</text></view></view>
+          <view class="section-heading"><view><text class="section-title">训练日准备</text><text class="section-note">只保留与今天训练主题直接相关的准备动作</text></view></view>
           <ExerciseCard
-            v-for="exercise in todayExercises"
+            v-for="exercise in todayPreparationExercises"
             :key="exercise.id"
             :exercise="exercise"
             trackable
             :done="completedSet.has(exercise.id)"
             @update:done="toggleExercise(exercise.id, $event)"
           />
+          <template v-if="todayPersonalRehabExercises.length">
+            <view class="section-heading rehab-heading"><view><text class="section-title">个人康复任务</text><text class="section-note">按今天的训练部位筛选 · 每天最多 3 项 · 不计入热身</text></view></view>
+            <ExerciseCard
+              v-for="exercise in todayPersonalRehabExercises"
+              :key="exercise.id"
+              :exercise="exercise"
+              role="个人康复"
+              trackable
+              :done="completedSet.has(exercise.id)"
+              @update:done="toggleExercise(exercise.id, $event)"
+            />
+          </template>
         </template>
       </view>
 
@@ -206,12 +219,12 @@ import { PhBarbell, PhCalendarCheck, PhCheckCircle, PhMagnifyingGlass, PhX } fro
 import AppNav from '../../components/AppNav.vue'
 import ExerciseCard from '../../components/ExerciseCard.vue'
 import {
-  currentSessionExerciseIds,
   db,
   exerciseIdsForPlanDay,
   exercisesForFunctionalModule,
   getExercise,
   selectedTrainingSplit,
+  trainingSessionGroups,
   trainingDayForSplit,
 } from '../../data/index.js'
 import { useWorkspace } from '../../stores/workspace.js'
@@ -253,9 +266,14 @@ const selectedSplit = computed(() => selectedTrainingSplit(selectedSplitId.value
 const todayDay = computed(() => trainingDayForSplit(selectedSplitId.value))
 const orderedDays = computed(() => [1, 2, 3, 4, 5, 6, 0].map((weekday) => selectedSplit.value.days.find((day) => day.weekday === weekday)))
 const selectedDay = computed(() => selectedSplit.value.days.find((day) => day.weekday === selectedWeekday.value) || selectedSplit.value.days[0])
-const todayExercises = computed(() => todayDay.value && !todayDay.value.isRest
-  ? currentSessionExerciseIds(selectedConditionIds.value, todayDay.value).map(getExercise).filter(Boolean)
-  : [])
+const todayGroups = computed(() => trainingSessionGroups(selectedConditionIds.value, todayDay.value))
+const todayPreparationExercises = computed(() => todayGroups.value.preparationIds.map(getExercise).filter(Boolean))
+const todayPersonalRehabExercises = computed(() => todayGroups.value.personalRehabIds.map(getExercise).filter(Boolean))
+const todayActionSummary = computed(() => {
+  const preparationCount = todayPreparationExercises.value.length
+  const rehabCount = todayPersonalRehabExercises.value.length
+  return rehabCount ? `${preparationCount} 个准备 · ${rehabCount} 个个人康复` : `${preparationCount} 个准备动作`
+})
 
 const activeTrack = computed(() => db.functionalTracks.find((track) => track.id === activeTrackId.value) || db.functionalTracks[0])
 const activeModule = computed(() => activeTrack.value.modules.find((module) => module.id === activeModuleId.value) || activeTrack.value.modules[0])
@@ -313,6 +331,7 @@ onLoad((options) => {
 .summary-copy { min-width: 0; }
 .summary-kicker, .overview-kicker { display: block; color: var(--color-teal-700); font-size: 11px; font-weight: 740; }
 .summary-title { display: block; margin-top: 3px; color: var(--color-text); font-size: 18px; font-weight: 780; }
+.summary-count { display: block; margin-top: 4px; color: var(--color-teal-700); font-size: 11px; font-weight: 720; }
 .summary-note { display: block; margin-top: 6px; color: var(--color-text-secondary); font-size: 11px; line-height: 1.55; }
 .rest-state { margin-top: 4px; }
 .split-selector { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(138px, 42%); gap: 9px; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; }

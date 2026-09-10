@@ -14,7 +14,7 @@ import performanceGuidanceData from '../../content/performance-guidance.json'
 import trainingSplitsData from '../../content/training-splits.json'
 import functionalProgramsData from '../../content/functional-programs.json'
 import { collectSelectedRelationshipEdges, groupRelationshipGraph } from './graph-core.mjs'
-import { resolveSelectedSplit, splitDayForWeekday, sportModuleSuggestion, weekRotationIndex } from './training-core.mjs'
+import { resolveSelectedSplit, splitDayForWeekday, sportModuleSuggestion, trainingDayExerciseGroups, weekRotationIndex } from './training-core.mjs'
 
 const allGuidance = [...exerciseGuidanceData.guidance, ...performanceGuidanceData.guidance]
 const allExercises = [...exercisesData.exercises, ...performanceExercisesData.exercises]
@@ -122,9 +122,13 @@ export function exerciseIdsForPlanDay(day) {
   ])]
 }
 
-/** 当前关注动作优先，并补充当天星期计划；Today 与 Training 共用。 */
-export function currentSessionExerciseIds(conditionIds, day) {
-  return [...new Set([...aggregateExerciseIds(conditionIds), ...exerciseIdsForPlanDay(day)])]
+/** 将当日准备和与训练部位相关的个人康复任务分组；Today 与 Training 共用。 */
+export function trainingSessionGroups(conditionIds, day) {
+  return trainingDayExerciseGroups({
+    conditions: db.conditions,
+    selectedConditionIds: conditionIds,
+    day,
+  })
 }
 
 export function selectedTrainingSplit(id) {

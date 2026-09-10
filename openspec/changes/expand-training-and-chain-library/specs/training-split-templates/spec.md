@@ -26,9 +26,15 @@ Each template day SHALL map to conservative preparation and functional-support e
 - **THEN** the application SHALL show the day focus and supporting actions and SHALL NOT present one fixed loading prescription as universally appropriate
 
 ### Requirement: Selected split drives Today
-Today and Training Today SHALL resolve the same date-appropriate schedule from the locally selected split while keeping selected-condition actions first.
+Today and Training Today SHALL resolve the same date-appropriate schedule from the locally selected split. Template preparation SHALL be shown separately from selected-condition rehabilitation work.
 
 #### Scenario: Change split on the current day
 - **WHEN** the user changes the selected split and returns to Today
-- **THEN** both Today surfaces SHALL show the new split day while retaining current-condition actions ahead of template support actions
+- **THEN** both Today surfaces SHALL show the new split day while retaining a separate, bounded personal-rehabilitation group
 
+### Requirement: Relevant and bounded personal rehabilitation
+Training Today SHALL keep template preparation specific to the current training focus and SHALL place selected-condition work in a separately labelled personal-rehabilitation group. Personal rehabilitation SHALL be filtered by upper-body, lower-body, or full-body focus, SHALL exclude preparation duplicates, and SHALL contain no more than three actions.
+
+#### Scenario: Open a chest training day with lower- and upper-body concerns selected
+- **WHEN** the current split day is chest or upper-body focused
+- **THEN** lower-chain actions SHALL NOT appear in training-day preparation or the day's personal-rehabilitation group, upper-body personal actions SHALL be labelled separately, and the personal group SHALL contain at most three actions

@@ -3,6 +3,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import test from 'node:test'
+import { trainingDayExerciseGroups } from '../src/data/training-core.mjs'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const readJson = (path) => JSON.parse(readFileSync(resolve(root, path), 'utf8'))
@@ -54,6 +55,26 @@ test('five split templates resolve every support action and keep chest legs back
       assert.ok(exerciseIds.has(id), `${split.id} references missing support action ${id}`)
     }))
   })
+})
+
+test('Thursday chest B keeps the example lower-chain concerns out of Today', () => {
+  const split = trainingSplits.splits.find((item) => item.id === trainingSplits.defaultId)
+  const day = split.days.find((item) => item.weekday === 4)
+  const selectedConditionIds = [
+    'cond-ankle-dorsiflex-right',
+    'cond-pelvic-rotation',
+    'cond-thoracic-shift-right',
+    'cond-scapular-weakness-right',
+    'cond-humeral-anterior-glide',
+  ]
+  const result = trainingDayExerciseGroups({ conditions, selectedConditionIds, day })
+  assert.deepEqual(result.preparationIds, ['ex-cat-cow', 'ex-ytw', 'ex-band-external-rotation'])
+  assert.equal(result.personalRehabIds.length, 3)
+  const lowerChainIds = new Set([
+    'ex-knee-to-wall', 'ex-calf-foamroll', 'ex-dead-bug',
+    'ex-clamshell', 'ex-bird-dog', 'ex-side-lying-abduction',
+  ])
+  result.allIds.forEach((id) => assert.ok(!lowerChainIds.has(id), `chest day leaked lower-chain action ${id}`))
 })
 
 test('sport tracks contain resolved purpose-led modules and the confirmed 22 performance actions', () => {

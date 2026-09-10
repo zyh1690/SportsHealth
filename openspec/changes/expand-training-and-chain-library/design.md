@@ -51,7 +51,7 @@ Alternative considered: mutate the v2 payload in place. Rejected because rollbac
 
 ### Resolve split days deterministically
 
-Each template owns a seven-slot schedule containing training focuses or recovery days. Today derives its local weekday slot from the selected template, then prepends deduplicated selected-condition actions. Switching templates changes the plan-derived portion only; completion remains keyed by date and exercise ID.
+Each template owns a seven-slot schedule containing training focuses or recovery days. Today derives its local weekday slot from the selected template, presents template preparation first, then adds at most three deduplicated selected-condition actions matching the day's upper-body, lower-body, or full-body focus. The two groups are labelled separately so rehabilitation work is not mistaken for warm-up. Switching templates changes the plan-derived portion only; completion remains keyed by date and exercise ID.
 
 ### Model modules as purposes over shared actions
 

@@ -146,12 +146,12 @@ import {
   assetUrl,
   chainEdges,
   chainGroups,
-  currentSessionExerciseIds,
   getCondition,
   getExercise,
   getFunctionalTrack,
   selectedTrainingSplit,
   suggestedSportModule,
+  trainingSessionGroups,
   trainingDayForSplit,
 } from '../../data/index.js'
 import { useWorkspace } from '../../stores/workspace.js'
@@ -172,9 +172,8 @@ const dateLabel = new Intl.DateTimeFormat('zh-CN', { month: 'long', day: 'numeri
 const selectedSplit = computed(() => selectedTrainingSplit(selectedSplitId.value))
 const todayPlan = computed(() => trainingDayForSplit(selectedSplitId.value, now.getDay()))
 const isRecoveryDay = computed(() => !todayPlan.value || todayPlan.value.isRest)
-const sessionExerciseIds = computed(() => !isRecoveryDay.value
-  ? currentSessionExerciseIds(selectedConditionIds.value, todayPlan.value)
-  : [])
+const sessionGroups = computed(() => trainingSessionGroups(selectedConditionIds.value, todayPlan.value))
+const sessionExerciseIds = computed(() => sessionGroups.value.allIds)
 const nextExercise = computed(() => sessionExerciseIds.value.map(getExercise).find((item) => item && !completedSet.value.has(item.id)))
 const completedCount = computed(() => sessionExerciseIds.value.filter((id) => completedSet.value.has(id)).length)
 const progressPercent = computed(() => sessionExerciseIds.value.length ? Math.round((completedCount.value / sessionExerciseIds.value.length) * 100) : 0)
@@ -182,8 +181,14 @@ const progressStyle = computed(() => ({ background: `conic-gradient(var(--color-
 const estimatedMinutes = computed(() => Math.max(3, Math.min(8, Math.ceil((nextExercise.value?.difficulty || 1) * 2.5))))
 const todayPlanTitle = computed(() => todayPlan.value ? `${todayPlan.value.day} · ${todayPlan.value.focus}` : '今日 · 恢复日')
 const todayPlanLabel = computed(() => todayPlan.value && !todayPlan.value.isRest ? selectedSplit.value.name : '轻松活动，留意整体恢复')
-const todayExerciseCount = computed(() => sessionExerciseIds.value.length)
-const todaySessionSubtitle = computed(() => todayPlan.value && !todayPlan.value.isRest ? `${todayExerciseCount.value} 个身体关注与功能支持动作` : todayPlan.value?.target || '轻松活动与恢复提醒')
+const todaySessionSubtitle = computed(() => {
+  if (!todayPlan.value || todayPlan.value.isRest) return todayPlan.value?.target || '轻松活动与恢复提醒'
+  const preparationCount = sessionGroups.value.preparationIds.length
+  const rehabCount = sessionGroups.value.personalRehabIds.length
+  return rehabCount
+    ? `${preparationCount} 个训练日准备 · ${rehabCount} 个个人康复`
+    : `${preparationCount} 个训练日准备动作`
+})
 
 const graphPreview = computed(() => chainGroups(selectedConditionIds.value, chainEdges(selectedConditionIds.value)))
 const chainPreviewGroups = computed(() => graphPreview.value.groups.map((group) => ({

@@ -18,7 +18,7 @@
 - [x] 3.1 Replace the fixed plan import with deterministic selected-template and weekday resolution helpers
 - [x] 3.2 Add Split Plans selection, explanation, advantages/trade-offs, recovery guidance, weekly schedule, and day detail
 - [x] 3.3 Keep chest/legs/back selected by default and synchronize Today with the selected split
-- [x] 3.4 Preserve condition-first action ordering and same-day completion when switching templates
+- [x] 3.4 Preserve distinct preparation/personal-rehabilitation groups and same-day completion when switching templates
 
 ## 4. Sport-Specific Functional Training
 
@@ -51,3 +51,10 @@
 - [x] 7.4 Update visual QA evidence and compare the revised Training and Chain views with the selected design direction
 - [x] 7.5 Run strict OpenSpec validation and a two-axis repository-standards/specification review
 - [x] 7.6 Report delivered scope, evidence, limitations, archive status, and deployment status without committing or publishing
+
+## 8. Training-Day Relevance Fix
+
+- [x] 8.1 Add regression tests proving chest days exclude lower-chain concern actions and personal work is capped at three
+- [x] 8.2 Separate template preparation from personal rehabilitation in Today and Training Today
+- [x] 8.3 Filter personal rehabilitation by upper-body, lower-body, or full-body training focus and remove preparation duplicates
+- [x] 8.4 Verify the corrected chest-day browser journey, full test suite, production build, and strict OpenSpec validation

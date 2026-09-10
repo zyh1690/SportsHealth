@@ -27,6 +27,8 @@ Date: 2026-09-09
 - Kinetic-chain nodes reveal their detail immediately below the tapped node on mobile and update the adjacent sticky detail on desktop; all selected relationship groups, branches, cycles and directed edges are retained, while unlinked observations stay in a separate section.
 - Exercise details expand to show setup, cues, side, equipment, regression, progression, compensations, stop conditions, and sources.
 - Today and Training resolve the same applicable session from selected conditions and the current weekday plan.
+- Training-day preparation and personal rehabilitation are separate: personal work is matched to the day's upper/lower/full-body focus, excludes preparation duplicates, and is capped at three actions.
+- Regression journey with all five example concerns on Thursday chest B: 3 preparation actions + 3 upper-body personal actions; knee-to-wall, calf rolling, clamshell, dead bug, bird dog, and side-lying abduction are absent.
 - Five split templates expose audience, trade-offs, recovery guidance, full weekly schedule and per-day support actions; chest / legs / back remains the default.
 - Training uses four clear subviews: Today, Split Plans, Sport-Specific and Exercise Library.
 - Running, HYROX and Fitness each expose three purpose-led modules with duration, frequency, placement and an inclusion reason for every action.
