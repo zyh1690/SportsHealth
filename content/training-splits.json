@@ -1,0 +1,65 @@
+{
+  "defaultId": "split-chest-legs-back",
+  "splits": [
+    {
+      "id": "split-full-body", "name": "不分化 · 全身训练", "shortName": "不分化", "frequency": "每周 2–3 次", "audience": "训练时间有限、刚开始规律力量训练，或希望提高每周动作重复频率的人。", "summary": "每次覆盖推、拉、蹲、髋铰链与核心，训练日之间留出恢复。", "advantages": ["同一动作模式每周能重复练习", "漏掉一次训练时影响较小"], "tradeoffs": ["单次训练覆盖面较大", "高训练量阶段可能需要控制每个部位的总组数"], "recovery": "相邻全身训练日之间建议至少留出一个恢复日；疲劳明显时优先减少总量。",
+      "days": [
+        {"weekday": 0, "day": "周日", "focus": "恢复", "isRest": true, "target": "低强度活动与睡眠恢复。", "supportExerciseIds": []},
+        {"weekday": 1, "day": "周一", "focus": "全身 A", "target": "以蹲、水平推拉和躯干稳定为主。", "supportExerciseIds": ["ex-knee-to-wall", "ex-thoracic-rotation", "ex-pallof-press"], "postNote": "主训练动作保持余量，不必第一天覆盖所有器械。"},
+        {"weekday": 2, "day": "周二", "focus": "恢复", "isRest": true, "target": "轻松走动或完全休息。", "supportExerciseIds": []},
+        {"weekday": 3, "day": "周三", "focus": "全身 B", "target": "以髋铰链、垂直推拉和单腿控制为主。", "supportExerciseIds": ["ex-cat-cow", "ex-band-face-pull", "ex-single-leg-rdl"], "postNote": "若上次酸痛仍明显，减少相同肌群的训练量。"},
+        {"weekday": 4, "day": "周四", "focus": "恢复", "isRest": true, "target": "低强度恢复。", "supportExerciseIds": []},
+        {"weekday": 5, "day": "周五", "focus": "全身 C", "target": "用较轻负荷复习主要动作，并补充负重行走。", "supportExerciseIds": ["ex-dead-bug", "ex-suitcase-carry", "ex-ytw"], "postNote": "以动作质量结束本周，不需要为了凑量训练到力竭。"},
+        {"weekday": 6, "day": "周六", "focus": "恢复", "isRest": true, "target": "可选轻松有氧或休息。", "supportExerciseIds": []}
+      ]
+    },
+    {
+      "id": "split-upper-lower", "name": "二分化 · 上肢 / 下肢", "shortName": "二分化", "frequency": "每周 4 次", "audience": "已有基础、希望兼顾训练频率和单次时长的人。", "summary": "上肢与下肢各训练两次，常用高低强度或不同动作重点区分同类训练日。", "advantages": ["每个主要部位通常每周获得两次刺激", "训练日结构清晰且恢复窗口充足"], "tradeoffs": ["单次上肢日可能包含较多动作", "下肢日和跑步或专项训练需要协调"], "recovery": "避免把高强度跑步紧邻较重下肢日；第二次同类训练可减少总量或改变重点。",
+      "days": [
+        {"weekday": 0, "day": "周日", "focus": "恢复", "isRest": true, "target": "为下周恢复。", "supportExerciseIds": []},
+        {"weekday": 1, "day": "周一", "focus": "上肢 A", "target": "水平推拉与肩胛控制。", "supportExerciseIds": ["ex-thoracic-rotation", "ex-band-external-rotation", "ex-pallof-press"]},
+        {"weekday": 2, "day": "周二", "focus": "下肢 A", "target": "深蹲模式与单腿控制。", "supportExerciseIds": ["ex-knee-to-wall", "ex-clamshell", "ex-step-down"]},
+        {"weekday": 3, "day": "周三", "focus": "恢复", "isRest": true, "target": "轻松活动或休息。", "supportExerciseIds": []},
+        {"weekday": 4, "day": "周四", "focus": "上肢 B", "target": "垂直推拉、上背和抗旋转。", "supportExerciseIds": ["ex-cat-cow", "ex-band-face-pull", "ex-ytw"]},
+        {"weekday": 5, "day": "周五", "focus": "下肢 B", "target": "髋铰链、后侧链与负重步态。", "supportExerciseIds": ["ex-calf-raise", "ex-single-leg-rdl", "ex-suitcase-carry"]},
+        {"weekday": 6, "day": "周六", "focus": "恢复", "isRest": true, "target": "可选低强度有氧。", "supportExerciseIds": []}
+      ]
+    },
+    {
+      "id": "split-chest-legs-back", "name": "三分化 · 胸 / 腿 / 背", "shortName": "三分化", "frequency": "每周 6 次", "audience": "恢复能力良好、已习惯较高训练频率，并能稳定安排六个训练日的人。", "summary": "沿用当前胸、腿、背循环两次的安排，并用第二轮调整疲劳和动作重点。", "advantages": ["每个训练日主题集中", "保留当前熟悉的训练节奏"], "tradeoffs": ["每周六练的恢复成本较高", "缺课后不建议把训练压缩堆叠"], "recovery": "睡眠、关节反应或表现连续下降时，优先减少第二轮训练量或增加恢复日。",
+      "days": [
+        {"weekday": 0, "day": "周日", "focus": "恢复", "isRest": true, "target": "轻松走动、补充睡眠，不为了补课堆量。", "supportExerciseIds": []},
+        {"weekday": 1, "day": "周一", "focus": "胸 · 推 A", "target": "推类训练前确认肩部上举、外旋和肩胛控制舒适。", "supportExerciseIds": ["ex-thoracic-rotation", "ex-cat-cow", "ex-band-external-rotation", "ex-pallof-press"]},
+        {"weekday": 2, "day": "周二", "focus": "腿 · 蹲与髋铰链 A", "target": "观察踝活动度、单腿平衡与髋膝控制。", "supportExerciseIds": ["ex-calf-foamroll", "ex-knee-to-wall", "ex-clamshell", "ex-single-leg-rdl"]},
+        {"weekday": 3, "day": "周三", "focus": "背 · 拉 A", "target": "用轻阻力确认肩胛和肩关节动作舒适。", "supportExerciseIds": ["ex-thoracic-rotation", "ex-chin-tuck", "ex-band-face-pull", "ex-ytw"]},
+        {"weekday": 4, "day": "周四", "focus": "胸 · 推 B", "target": "复查胸椎活动和肩部舒适度，疲劳明显时减少总量。", "supportExerciseIds": ["ex-cat-cow", "ex-ytw", "ex-band-external-rotation"]},
+        {"weekday": 5, "day": "周五", "focus": "腿 · 蹲与髋铰链 B", "target": "留意疲劳是否改变踝、髋和膝的动作质量。", "supportExerciseIds": ["ex-knee-to-wall", "ex-bird-dog", "ex-step-down", "ex-single-leg-rdl"]},
+        {"weekday": 6, "day": "周六", "focus": "背 · 拉 B", "target": "以动作质量为主，为随后恢复留出余量。", "supportExerciseIds": ["ex-thoracic-rotation", "ex-band-face-pull", "ex-pallof-press"]}
+      ]
+    },
+    {
+      "id": "split-four-way", "name": "四分化 · 胸 / 背 / 腿 / 肩与手臂", "shortName": "四分化", "frequency": "每周 4 次", "audience": "希望单日聚焦、同时保留三个恢复或专项训练窗口的人。", "summary": "四个主题日分散在一周内，适合控制单次训练范围并为其它运动留出空间。", "advantages": ["单日重点清楚", "容易把跑步或专项模块放在非力量日"], "tradeoffs": ["每个部位通常只有一次主要训练机会", "漏掉一天会让该主题间隔明显变长"], "recovery": "腿日与高冲击专项训练至少错开一天；肩与手臂日仍需留意前两天推拉疲劳。",
+      "days": [
+        {"weekday": 0, "day": "周日", "focus": "恢复", "isRest": true, "target": "完全休息或轻松活动。", "supportExerciseIds": []},
+        {"weekday": 1, "day": "周一", "focus": "胸", "target": "水平推为主，维持肩胛和躯干控制。", "supportExerciseIds": ["ex-thoracic-rotation", "ex-band-external-rotation", "ex-pallof-press"]},
+        {"weekday": 2, "day": "周二", "focus": "背", "target": "水平与垂直拉，避免用颈部紧张换幅度。", "supportExerciseIds": ["ex-cat-cow", "ex-band-face-pull", "ex-ytw"]},
+        {"weekday": 3, "day": "周三", "focus": "恢复 / 专项窗口", "isRest": true, "target": "可选择专项模块或低强度恢复。", "supportExerciseIds": []},
+        {"weekday": 4, "day": "周四", "focus": "腿", "target": "覆盖蹲与髋铰链并观察单腿对线。", "supportExerciseIds": ["ex-knee-to-wall", "ex-step-down", "ex-single-leg-rdl"]},
+        {"weekday": 5, "day": "周五", "focus": "肩与手臂", "target": "肩部推拉与手臂训练，控制累计肩部疲劳。", "supportExerciseIds": ["ex-band-external-rotation", "ex-ytw", "ex-suitcase-carry"]},
+        {"weekday": 6, "day": "周六", "focus": "恢复 / 专项窗口", "isRest": true, "target": "可选择专项模块或休息。", "supportExerciseIds": []}
+      ]
+    },
+    {
+      "id": "split-five-way", "name": "五分化 · 胸 / 背 / 腿 / 肩 / 手臂", "shortName": "五分化", "frequency": "每周 5 次", "audience": "训练经验较多、偏好单部位聚焦且能稳定执行五天计划的人。", "summary": "工作日依次训练一个主要主题，周末恢复；适合高单日专注度而非追求复杂技巧。", "advantages": ["单次训练目标集中", "各主题动作选择空间较大"], "tradeoffs": ["每个部位主要频率通常较低", "计划连续性依赖稳定出勤"], "recovery": "连续五天并非必须；肩部对胸、背、肩、手臂日的累计负荷需要特别观察。",
+      "days": [
+        {"weekday": 0, "day": "周日", "focus": "恢复", "isRest": true, "target": "完全休息或轻松活动。", "supportExerciseIds": []},
+        {"weekday": 1, "day": "周一", "focus": "胸", "target": "推类训练与肩胛控制。", "supportExerciseIds": ["ex-thoracic-rotation", "ex-band-external-rotation", "ex-pallof-press"]},
+        {"weekday": 2, "day": "周二", "focus": "背", "target": "拉类训练与上背协调。", "supportExerciseIds": ["ex-cat-cow", "ex-band-face-pull", "ex-ytw"]},
+        {"weekday": 3, "day": "周三", "focus": "腿", "target": "蹲、髋铰链和单腿控制。", "supportExerciseIds": ["ex-knee-to-wall", "ex-step-down", "ex-single-leg-rdl"]},
+        {"weekday": 4, "day": "周四", "focus": "肩", "target": "上举与肩带稳定，避免用腰部换取幅度。", "supportExerciseIds": ["ex-thoracic-rotation", "ex-band-external-rotation", "ex-ytw"]},
+        {"weekday": 5, "day": "周五", "focus": "手臂", "target": "手臂训练同时保留握力和躯干支撑。", "supportExerciseIds": ["ex-farmer-carry", "ex-pallof-press", "ex-doorway-pec-stretch"]},
+        {"weekday": 6, "day": "周六", "focus": "恢复", "isRest": true, "target": "轻松活动或休息。", "supportExerciseIds": []}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "tracks": [
+    {
+      "id": "running", "name": "跑步", "icon": "running", "tagline": "让力量更好地转化为稳定、经济的单腿支撑。", "description": "围绕足踝耐力、单腿控制和跑姿转换组织；它不能替代跑量管理或处理持续疼痛。", "audience": "希望提高跑步支撑稳定、降低动作后半程失控，或为恢复跑步建立基础的人。",
+      "modules": [
+        {
+          "id": "running-prep", "code": "准备", "name": "跑前支撑准备", "priority": "primary", "purpose": "在跑前用低疲劳方式确认踝背屈、小腿和单腿位置。", "duration": "约 20 分钟", "frequency": "每周 2–3 次", "placement": "轻松跑或质量跑前；每项保留余量。",
+          "exercises": [
+            {"exerciseId": "ex-knee-to-wall", "purpose": "确认脚跟着地时的踝背屈和左右差异。"},
+            {"exerciseId": "ex-soleus-raise", "purpose": "唤醒屈膝支撑下的小腿耐力。"},
+            {"exerciseId": "ex-runner-lunge-balance", "purpose": "把推地动作连接到单腿跑姿稳定。"},
+            {"exerciseId": "ex-dead-bug", "purpose": "减少提膝时用腰部代偿。"}
+          ]
+        },
+        {
+          "id": "running-capacity", "code": "能力", "name": "单腿支撑能力", "priority": "primary", "purpose": "发展跑步反复落地所需的足踝、小腿、髋膝离心控制。", "duration": "约 25–30 分钟", "frequency": "每周 2 次", "placement": "安排在轻松跑后或独立力量日；避免紧邻最重的间歇跑。",
+          "exercises": [
+            {"exerciseId": "ex-calf-raise", "purpose": "建立直膝蹬地阶段的小腿力量。"},
+            {"exerciseId": "ex-soleus-raise", "purpose": "提高屈膝支撑期的比目鱼肌耐力。"},
+            {"exerciseId": "ex-step-down", "purpose": "训练下坡和落地阶段的单腿离心控制。"},
+            {"exerciseId": "ex-single-leg-rdl", "purpose": "强化髋铰链与骨盆稳定。"},
+            {"exerciseId": "ex-runner-lunge-balance", "purpose": "练习推地、提膝和躯干协同。"}
+          ]
+        },
+        {
+          "id": "running-recovery", "code": "恢复", "name": "跑后恢复补足", "priority": "secondary", "purpose": "用低强度动作恢复小腿、髋部和躯干控制，不把恢复做成另一堂高负荷训练。", "duration": "约 20 分钟", "frequency": "每周 1–3 次", "placement": "轻松跑后或恢复日；疼痛加重时停止。",
+          "exercises": [
+            {"exerciseId": "ex-calf-foamroll", "purpose": "为紧张小腿提供可控的短时舒缓。"},
+            {"exerciseId": "ex-hip-flexor-stretch", "purpose": "缓解久坐与重复跑步后的髋前侧紧张感。"},
+            {"exerciseId": "ex-clamshell", "purpose": "以低负荷维持髋外旋控制。"},
+            {"exerciseId": "ex-bird-dog", "purpose": "在低疲劳条件下复习对侧躯干稳定。"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyrox", "name": "HYROX", "icon": "hyrox", "tagline": "把跑步和工作站连接成可持续的负重移动能力。", "description": "围绕雪橇、负重行走、弓步和墙球的动作要求，练习疲劳下的步态、躯干支撑与节奏。", "audience": "准备HYROX或其它跑步与功能站交替比赛，希望提升动作经济性的人。",
+      "modules": [
+        {
+          "id": "hyrox-prep", "code": "准备", "name": "工作站准备", "priority": "primary", "purpose": "在正式训练前确认踝、髋、肩和躯干能进入比赛动作位置。", "duration": "约 20 分钟", "frequency": "每周 2–3 次", "placement": "HYROX专项课前，保持低疲劳。",
+          "exercises": [
+            {"exerciseId": "ex-knee-to-wall", "purpose": "为弓步、墙球和雪橇推进确认踝背屈。"},
+            {"exerciseId": "ex-bear-crawl", "purpose": "连接肩带、核心和对侧协调。"},
+            {"exerciseId": "ex-front-rack-carry", "purpose": "预先建立前方负重下的呼吸与躯干位置。"},
+            {"exerciseId": "ex-wall-ball-rehearsal", "purpose": "用低次数练习下蹲、投球和接球节奏。"}
+          ]
+        },
+        {
+          "id": "hyrox-capacity", "code": "能力", "name": "负重移动能力", "priority": "primary", "purpose": "训练比赛工作站需要的持续推地、握力、弓步和全身耐力。", "duration": "约 25–30 分钟", "frequency": "每周 1–2 次", "placement": "独立专项课或力量训练后半段；与高强度跑错开。",
+          "exercises": [
+            {"exerciseId": "ex-sled-push-rehearsal", "purpose": "练习稳定身体角度与连续短步推进。"},
+            {"exerciseId": "ex-farmer-carry", "purpose": "强化比赛所需的握力、上背与负重步态。"},
+            {"exerciseId": "ex-walking-lunge", "purpose": "建立重复行进弓步的单腿耐力。"},
+            {"exerciseId": "ex-wall-ball-rehearsal", "purpose": "在可控疲劳下保持下蹲与投球节奏。"},
+            {"exerciseId": "ex-pallof-press", "purpose": "补充疲劳状态下的躯干抗旋转控制。"}
+          ]
+        },
+        {
+          "id": "hyrox-recovery", "code": "恢复", "name": "跑站衔接恢复", "priority": "secondary", "purpose": "在高代谢训练之间恢复小腿、髋和肩带控制。", "duration": "约 20 分钟", "frequency": "每周 1–2 次", "placement": "恢复日或高强度专项课次日。",
+          "exercises": [
+            {"exerciseId": "ex-calf-foamroll", "purpose": "舒缓跑步与雪橇推进累积的小腿紧张。"},
+            {"exerciseId": "ex-hip-flexor-stretch", "purpose": "恢复弓步和跑步后的髋前侧舒适度。"},
+            {"exerciseId": "ex-band-external-rotation", "purpose": "低负荷恢复墙球和雪橇支撑后的肩袖控制。"},
+            {"exerciseId": "ex-bird-dog", "purpose": "用低疲劳方式复习躯干稳定。"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fitness", "name": "健身运动表现", "icon": "fitness", "tagline": "把健身房里的力量转化为爆发、协调、负重移动和真实运动能力。", "description": "传统增肌训练常集中在稳定器械和单一平面。本专项不重复热身动作，而是补充快速发力、旋转传力、复杂支撑转换与负重行走。", "audience": "已有规律力量训练，但感觉身体僵硬、动作选择单一，或力量难以转化为跑跳与综合表现的人。",
+      "modules": [
+        {
+          "id": "fitness-power", "code": "A", "name": "爆发力与力量传递", "priority": "primary", "purpose": "把慢速力量转化为快速髋伸展、投掷、跳跃和旋转输出。", "duration": "约 25–30 分钟", "frequency": "每周 1–2 次", "placement": "力量训练前半段、充分热身后且尚未疲劳时。",
+          "exercises": [
+            {"exerciseId": "ex-kettlebell-swing", "purpose": "用快速髋伸展训练重复功率。"},
+            {"exerciseId": "ex-med-ball-rotational-throw", "purpose": "把脚髋力量传递到旋转投掷。"},
+            {"exerciseId": "ex-med-ball-slam", "purpose": "练习全身快速屈伸和高意图输出。"},
+            {"exerciseId": "ex-box-jump", "purpose": "发展垂直爆发并保持稳定落地。"},
+            {"exerciseId": "ex-landmine-rotation", "purpose": "在负重下整合脚、髋、躯干与上肢旋转。"}
+          ]
+        },
+        {
+          "id": "fitness-loaded", "code": "C", "name": "全身协调与负重移动", "priority": "primary", "purpose": "在姿势转换、不对称负重和行走中检验力量是否能稳定传递。", "duration": "约 25–30 分钟", "frequency": "每周 1–2 次", "placement": "独立功能训练日，或主力量训练后使用较低总量。",
+          "exercises": [
+            {"exerciseId": "ex-turkish-get-up", "purpose": "整合地面起身、肩部稳定和多平面协调。"},
+            {"exerciseId": "ex-front-rack-reverse-lunge", "purpose": "把单腿力量与前架躯干支撑结合。"},
+            {"exerciseId": "ex-suitcase-carry", "purpose": "训练不对称负重下的抗侧屈和步态。"},
+            {"exerciseId": "ex-farmer-carry", "purpose": "用双侧负重建立握力、上背与全身支撑。"},
+            {"exerciseId": "ex-bear-crawl", "purpose": "补充对侧协调和移动中的肩带稳定。"}
+          ]
+        },
+        {
+          "id": "fitness-multidirectional", "code": "B", "name": "多方向力量与落地减速", "priority": "optional", "purpose": "为有变向、球类或侧向移动需求的人补充额状面力量和制动能力。", "duration": "约 25 分钟", "frequency": "按专项需要每周 1 次", "placement": "仅在单腿基础和落地控制稳定时加入，不作为默认建议。",
+          "exercises": [
+            {"exerciseId": "ex-cossack-squat", "purpose": "建立侧向下蹲范围内的力量。"},
+            {"exerciseId": "ex-broad-jump-stick", "purpose": "练习水平发力后的稳定制动。"},
+            {"exerciseId": "ex-lateral-bound", "purpose": "发展侧向爆发和单腿落地控制。"},
+            {"exerciseId": "ex-step-down", "purpose": "用较低风险方式复习单腿离心控制。"},
+            {"exerciseId": "ex-copenhagen-plank", "purpose": "提高内收肌和侧向躯干支撑能力。"}
+          ]
+        }
+      ]
+    }
+  ]
+}

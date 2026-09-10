@@ -1,0 +1,158 @@
+{
+  "exercises": [
+    {
+      "id": "ex-calf-raise", "name": "站姿提踵",
+      "targetMuscles": ["腓肠肌", "足踝稳定肌"], "category": "strength", "difficulty": 1, "equipment": ["墙或扶手"],
+      "cues": ["前脚掌均匀压地，缓慢抬高脚跟", "顶端保持脚踝朝正前方", "控制下降至脚跟轻触地面"],
+      "commonErrors": ["借惯性弹起", "脚踝向外翻", "下降过快"], "contraindications": ["足踝急性肿胀", "跟腱区域锐痛"],
+      "videos": [], "source": "AAOS 足踝训练计划"
+    },
+    {
+      "id": "ex-soleus-raise", "name": "屈膝比目鱼肌提踵",
+      "targetMuscles": ["比目鱼肌", "足踝稳定肌"], "category": "strength", "difficulty": 1, "equipment": ["墙或扶手"],
+      "cues": ["保持膝盖轻屈并稳定", "前脚掌均匀压地后抬起脚跟", "慢速下降且膝盖不左右晃"],
+      "commonErrors": ["膝盖伸直", "身体上下弹动", "脚踝外翻"], "contraindications": ["足踝急性肿胀", "跟腱或小腿锐痛"],
+      "videos": [], "source": "AAOS 足踝训练计划"
+    },
+    {
+      "id": "ex-step-down", "name": "台阶下落控制",
+      "targetMuscles": ["股四头肌", "臀中肌", "小腿"], "category": "stability", "difficulty": 2, "equipment": ["低台阶"],
+      "cues": ["支撑脚全掌稳定", "缓慢屈髋屈膝让另一脚跟轻触地面", "支撑膝朝第二脚趾方向"],
+      "commonErrors": ["骨盆明显下沉", "膝盖内扣", "直接跌落到底"], "contraindications": ["膝关节肿胀或卡锁", "无法无痛上下台阶"],
+      "videos": [], "source": "NSCA 落地控制资料"
+    },
+    {
+      "id": "ex-runner-lunge-balance", "name": "跑者弓步平衡",
+      "targetMuscles": ["臀大肌", "臀中肌", "核心", "小腿"], "category": "stability", "difficulty": 2, "equipment": [],
+      "cues": ["从分腿站姿推地站起", "后腿向前提膝并保持躯干高", "在单腿位置稳定停顿"],
+      "commonErrors": ["支撑膝内扣", "骨盆旋转", "用摆臂冲过平衡位"], "contraindications": ["近期踝膝扭伤", "单腿承重出现锐痛"],
+      "videos": [], "source": "跑步专项动作控制"
+    },
+    {
+      "id": "ex-farmer-carry", "name": "双侧农夫行走",
+      "targetMuscles": ["握力肌群", "上背", "核心", "臀腿"], "category": "carry", "difficulty": 2, "equipment": ["两只壶铃或哑铃"],
+      "cues": ["两侧负重一致并站直", "肋骨与骨盆保持叠放", "用短而稳定的步幅向前走"],
+      "commonErrors": ["耸肩", "身体左右摇摆", "负重碰撞腿部"], "contraindications": ["手腕或肩部急性疼痛", "无法安全握持负重"],
+      "videos": [], "source": "HYROX 官方项目标准"
+    },
+    {
+      "id": "ex-front-rack-carry", "name": "前架负重行走",
+      "targetMuscles": ["核心", "上背", "肩带", "臀腿"], "category": "carry", "difficulty": 2, "equipment": ["壶铃或哑铃"],
+      "cues": ["负重贴近肩前侧", "保持肋骨不过度外翻", "平稳呼吸并控制步幅"],
+      "commonErrors": ["腰部后仰", "手腕过度折叠", "为了速度失去躯干位置"], "contraindications": ["肩腕急性疼痛", "负重位置影响呼吸"],
+      "videos": [], "source": "NSCA 负重行走训练资料"
+    },
+    {
+      "id": "ex-bear-crawl", "name": "熊爬",
+      "targetMuscles": ["肩带", "核心", "髋屈肌", "股四头肌"], "category": "stability", "difficulty": 2, "equipment": [],
+      "cues": ["四足位抬膝离地少许", "对侧手脚小步移动", "保持背部和骨盆安静"],
+      "commonErrors": ["臀部抬得过高", "同侧手脚同时跨大步", "肩膀塌陷"], "contraindications": ["手腕或肩部急性疼痛", "腰痛随爬行加重"],
+      "videos": [], "source": "NSCA 全身训练资料"
+    },
+    {
+      "id": "ex-walking-lunge", "name": "负重行进弓步",
+      "targetMuscles": ["臀大肌", "股四头肌", "腘绳肌", "核心"], "category": "strength", "difficulty": 2, "equipment": ["沙袋或哑铃（可选）"],
+      "cues": ["向前迈出可控步幅", "后膝向地面下降且前膝对准脚尖", "推地站起后再进入下一步"],
+      "commonErrors": ["步幅过窄失去平衡", "膝盖内扣", "身体前后晃动"], "contraindications": ["膝关节肿胀或打软", "无法舒适完成自重弓步"],
+      "videos": [], "source": "HYROX 官方项目标准"
+    },
+    {
+      "id": "ex-sled-push-rehearsal", "name": "雪橇推进预演",
+      "targetMuscles": ["臀腿", "小腿", "核心", "肩带"], "category": "strength", "difficulty": 3, "equipment": ["训练雪橇"],
+      "cues": ["双手稳定支撑雪橇立柱", "躯干形成稳定前倾线", "用连续短步把地面向后推"],
+      "commonErrors": ["腰背塌陷", "步幅过大失去持续发力", "一开始使用过重负荷"], "contraindications": ["无法无痛快走或弓步", "肩腰膝急性疼痛"],
+      "videos": [], "source": "HYROX 官方项目标准"
+    },
+    {
+      "id": "ex-wall-ball-rehearsal", "name": "墙球动作预演",
+      "targetMuscles": ["股四头肌", "臀大肌", "肩部", "核心"], "category": "power", "difficulty": 3, "equipment": ["软式药球", "墙面目标"],
+      "cues": ["球保持在胸前并面向目标", "下蹲后用腿部伸展带动投球", "接球时顺势缓冲进入下一次"],
+      "commonErrors": ["只用手臂投球", "接球僵硬", "疲劳后膝盖内扣"], "contraindications": ["肩膝急性疼痛", "上方空间或墙面不安全"],
+      "videos": [], "source": "HYROX 官方项目标准"
+    },
+    {
+      "id": "ex-kettlebell-swing", "name": "双手壶铃摆动",
+      "targetMuscles": ["臀大肌", "腘绳肌", "核心", "背阔肌"], "category": "power", "difficulty": 3, "equipment": ["壶铃"],
+      "cues": ["以髋铰链让壶铃后摆", "快速伸髋而不是用手臂抬起", "顶端站直并保持肋骨稳定"],
+      "commonErrors": ["做成深蹲", "用肩膀抬壶铃", "腰部过伸"], "contraindications": ["尚未掌握无痛髋铰链", "腰背或肩部急性疼痛"],
+      "videos": [], "source": "ACE 壶铃摆动技术"
+    },
+    {
+      "id": "ex-turkish-get-up", "name": "土耳其起身",
+      "targetMuscles": ["肩带", "核心", "臀腿", "全身协调"], "category": "strength", "difficulty": 3, "equipment": ["壶铃或轻物体"],
+      "cues": ["始终注视并稳定上方负重", "按肘撑、手撑、桥、跪姿、站立的顺序移动", "每个阶段停稳再继续"],
+      "commonErrors": ["跳过支撑步骤", "肩膀失去稳定", "为追求完整动作使用过重负荷"], "contraindications": ["肩部无法舒适上举", "眩晕或无法稳定起身"],
+      "videos": [], "source": "ACE 土耳其起身技术"
+    },
+    {
+      "id": "ex-landmine-rotation", "name": "地雷管旋转",
+      "targetMuscles": ["腹斜肌", "髋部", "肩带", "核心"], "category": "power", "difficulty": 3, "equipment": ["地雷管或固定杠铃"],
+      "cues": ["双手握住杠铃末端", "转动时脚与髋共同调整", "让躯干传递力量而不是扭膝"],
+      "commonErrors": ["膝盖固定而腰部硬扭", "手臂独立画大圈", "杠铃固定端不牢"], "contraindications": ["腰肩急性疼痛", "无法安全固定杠铃"],
+      "videos": [], "source": "ACE 综合旋转训练资料"
+    },
+    {
+      "id": "ex-med-ball-rotational-throw", "name": "药球旋转投掷",
+      "targetMuscles": ["臀部", "腹斜肌", "胸肩", "全身动力链"], "category": "power", "difficulty": 3, "equipment": ["可反弹药球", "牢固墙面"],
+      "cues": ["侧对墙站立并从髋部蓄力", "脚、髋、躯干依次转动完成投掷", "接球后重新建立稳定位置"],
+      "commonErrors": ["只用手臂甩球", "膝盖扭转", "离墙过近导致反弹不可控"], "contraindications": ["没有允许投球的墙面和安全空间", "肩腰膝急性疼痛"],
+      "videos": [], "source": "ACE 药球力量与控制训练"
+    },
+    {
+      "id": "ex-med-ball-slam", "name": "药球砸地",
+      "targetMuscles": ["背阔肌", "核心", "臀腿", "肩部"], "category": "power", "difficulty": 2, "equipment": ["砸地球"],
+      "cues": ["将球举至头顶且肋骨保持稳定", "用全身屈髋屈膝把球砸向身前地面", "等待球稳定后再拾起"],
+      "commonErrors": ["腰部过伸", "球砸得离脚太近", "使用会高弹的球"], "contraindications": ["上方或地面空间不安全", "肩腰急性疼痛"],
+      "videos": [], "source": "ACE 药球力量与控制训练"
+    },
+    {
+      "id": "ex-box-jump", "name": "跳箱",
+      "targetMuscles": ["臀大肌", "股四头肌", "小腿", "核心"], "category": "power", "difficulty": 3, "equipment": ["稳固低跳箱"],
+      "cues": ["从较低箱高开始", "用髋膝伸展起跳并安静落箱", "完全站稳后迈步下箱"],
+      "commonErrors": ["选择过高箱体", "膝盖内扣", "从箱上反复跳下"], "contraindications": ["不能稳定落地", "膝踝疼痛或近期下肢损伤"],
+      "videos": [], "source": "NSCA 跳跃与落地技术"
+    },
+    {
+      "id": "ex-broad-jump-stick", "name": "立定跳远与稳定落地",
+      "targetMuscles": ["臀腿", "小腿", "核心"], "category": "power", "difficulty": 3, "equipment": ["防滑地面"],
+      "cues": ["摆臂并快速伸髋向前跳", "双脚同时落地并屈髋屈膝缓冲", "保持落地位置两秒"],
+      "commonErrors": ["只追求距离", "落地膝内扣", "落地后连续向前冲"], "contraindications": ["无法完成安静的原地落地", "膝踝髋疼痛"],
+      "videos": [], "source": "NSCA 跳跃与落地技术"
+    },
+    {
+      "id": "ex-lateral-bound", "name": "侧向跨跳与稳定",
+      "targetMuscles": ["臀中肌", "内收肌", "股四头肌", "小腿"], "category": "power", "difficulty": 3, "equipment": ["防滑地面"],
+      "cues": ["从单腿向侧方跨跳", "落在对侧脚并屈髋屈膝缓冲", "稳定两秒后再返回"],
+      "commonErrors": ["落地腿膝盖内扣", "上身失控旋转", "未站稳就反向跳"], "contraindications": ["单腿落地不稳或疼痛", "近期踝膝损伤"],
+      "videos": [], "source": "NSCA 增强式与落地训练"
+    },
+    {
+      "id": "ex-cossack-squat", "name": "哥萨克深蹲",
+      "targetMuscles": ["内收肌", "臀腿", "踝关节", "核心"], "category": "strength", "difficulty": 3, "equipment": [],
+      "cues": ["采用宽站距并向一侧坐髋", "支撑脚全掌着地且膝盖朝脚尖", "另一腿伸直并保持躯干控制"],
+      "commonErrors": ["支撑膝内扣", "脚跟离地", "为了深度塌腰"], "contraindications": ["髋膝踝锐痛", "无法完成舒适的侧向弓步"],
+      "videos": [], "source": "ACE 多方向下肢训练资料"
+    },
+    {
+      "id": "ex-front-rack-reverse-lunge", "name": "前架反向弓步",
+      "targetMuscles": ["臀大肌", "股四头肌", "核心", "上背"], "category": "strength", "difficulty": 3, "equipment": ["壶铃或哑铃"],
+      "cues": ["负重稳定在肩前侧", "向后迈步并垂直下降", "前脚推地回到站姿"],
+      "commonErrors": ["腰部后仰", "前膝内扣", "后撤步幅过窄"], "contraindications": ["肩腕无法舒适前架", "膝髋急性疼痛"],
+      "videos": [], "source": "ACSM 阻力训练原则"
+    },
+    {
+      "id": "ex-suitcase-carry", "name": "单侧行李箱行走",
+      "targetMuscles": ["腹斜肌", "腰方肌", "握力肌群", "臀中肌"], "category": "carry", "difficulty": 2, "equipment": ["单只壶铃或哑铃"],
+      "cues": ["单手持重且身体保持直立", "不要向负重侧或对侧倾斜", "平稳走完后换手"],
+      "commonErrors": ["身体侧弯", "耸肩", "用过大步幅追求速度"], "contraindications": ["无法安全握持负重", "腰背或肩部急性疼痛"],
+      "videos": [], "source": "ACE 壶铃综合训练资料"
+    },
+    {
+      "id": "ex-copenhagen-plank", "name": "哥本哈根侧桥",
+      "targetMuscles": ["内收肌", "腹斜肌", "臀中肌", "肩带"], "category": "stability", "difficulty": 3, "equipment": ["稳固长凳"],
+      "cues": ["侧卧以前臂支撑", "上侧腿放在凳面并抬起骨盆", "身体保持直线并自然呼吸"],
+      "commonErrors": ["骨盆下沉或旋转", "支撑肩塌陷", "一开始采用过长杠杆"], "contraindications": ["腹股沟或内收肌急性疼痛", "肩部无法侧桥支撑"],
+      "videos": [], "source": "运动表现内收肌训练资料"
+    }
+  ]
+}

@@ -73,26 +73,51 @@
 
           <view>
             <view class="section-heading">
-              <view><text class="section-title">可能的关联路径</text><text class="section-note">用于组织观察，不等于原因判定</text></view>
+              <view><text class="section-title">动力链概览</text><text class="section-note">{{ chainSummary }} · 不等于原因判定</text></view>
               <view class="text-action" @tap="goChain">展开</view>
             </view>
             <view class="mini-chain surface-card">
-              <template v-for="(condition, index) in chainPreview" :key="condition.id">
-                <view class="mini-node"><text>{{ index + 1 }}</text><view><text class="mini-name">{{ condition.name }}</text><text class="mini-status">{{ index === 0 ? '已记录' : '需验证' }}</text></view></view>
-                <PhArrowDown v-if="index < chainPreview.length - 1" :key="condition.id + '-arrow'" class="mini-arrow" :size="18" />
-              </template>
-              <text v-if="chainPreview.length < selectedConditions.length" class="mini-more">另有 {{ selectedConditions.length - chainPreview.length }} 项，请在动力链页查看</text>
+              <view v-for="(group, index) in chainPreviewGroups" :key="group.id" class="mini-group">
+                <text class="mini-group-title">动力链 {{ index + 1 }} · {{ group.edges.length }} 条关系</text>
+                <view class="mini-node-row">
+                  <view v-for="condition in group.conditions" :key="condition.id" class="mini-node">
+                    <text>{{ condition.name.slice(0, 1) }}</text>
+                    <view><text class="mini-name">{{ condition.name }}</text><text class="mini-status">已纳入关联</text></view>
+                  </view>
+                </view>
+              </view>
+              <view v-if="chainUnlinked.length" class="mini-group unlinked">
+                <text class="mini-group-title">待建立关联 · {{ chainUnlinked.length }} 项</text>
+                <text class="mini-unlinked">{{ chainUnlinked.map((item) => item.name).join('、') }}</text>
+              </view>
             </view>
           </view>
         </view>
 
+      </template>
+
+      <view class="section-heading">
+        <view><text class="section-title">今日训练</text><text class="section-note">{{ todayPlanLabel }}</text></view>
+        <view class="text-action" @tap="goTraining">进入训练</view>
+      </view>
+      <view class="session-strip surface-card" @tap="goTraining">
+        <view class="session-icon"><PhBarbell :size="24" weight="duotone" /></view>
+        <view class="session-copy"><text class="session-title">{{ todayPlanTitle }}</text><text class="session-sub">{{ todaySessionSubtitle }}</text></view>
+        <PhArrowRight :size="20" weight="bold" />
+      </view>
+
+      <template v-if="sportSuggestion && selectedSportTrack">
         <view class="section-heading">
-          <view><text class="section-title">今日训练</text><text class="section-note">{{ todayPlanLabel }}</text></view>
-          <view class="text-action" @tap="goTraining">进入训练</view>
+          <view><text class="section-title">本周专项建议</text><text class="section-note">仅作提示，不自动加入今日动作</text></view>
+          <view class="text-action" @tap="goTraining('sport')">查看专区</view>
         </view>
-        <view class="session-strip surface-card" @tap="goTraining">
+        <view class="sport-suggestion surface-card" @tap="goTraining('sport')">
           <view class="session-icon"><PhBarbell :size="24" weight="duotone" /></view>
-          <view class="session-copy"><text class="session-title">{{ todayPlanTitle }}</text><text class="session-sub">{{ todaySessionSubtitle }}</text></view>
+          <view class="session-copy">
+            <text class="suggestion-kicker">{{ selectedSportTrack.name }} · {{ sportSuggestion.code }} 模块</text>
+            <text class="session-title">{{ sportSuggestion.name }}</text>
+            <text class="session-sub">{{ sportSuggestion.duration }} · {{ sportSuggestion.purpose }}</text>
+          </view>
           <PhArrowRight :size="20" weight="bold" />
         </view>
       </template>
@@ -106,7 +131,6 @@
 <script setup>
 import { computed } from 'vue'
 import {
-  PhArrowDown,
   PhArrowRight,
   PhBarbell,
   PhCaretRight,
@@ -118,20 +142,37 @@ import {
   PhTimer,
 } from '@phosphor-icons/vue'
 import AppNav from '../../components/AppNav.vue'
-import { assetUrl, chainEdges, currentSessionExerciseIds, findSpine, getCondition, getExercise } from '../../data/index.js'
+import {
+  assetUrl,
+  chainEdges,
+  chainGroups,
+  currentSessionExerciseIds,
+  getCondition,
+  getExercise,
+  getFunctionalTrack,
+  selectedTrainingSplit,
+  suggestedSportModule,
+  trainingDayForSplit,
+} from '../../data/index.js'
 import { useWorkspace } from '../../stores/workspace.js'
-import plan from '../../../content/plan.json'
 
-const { selectedConditionIds, completedSet, toggleExercise, loadExample } = useWorkspace()
+const {
+  selectedConditionIds,
+  selectedSplitId,
+  selectedSportTrackId,
+  completedSet,
+  toggleExercise,
+  loadExample,
+} = useWorkspace()
 const selectedConditions = computed(() => selectedConditionIds.value.map(getCondition).filter(Boolean))
 const focusPreview = computed(() => selectedConditions.value.slice(0, 3))
 
 const now = new Date()
 const dateLabel = new Intl.DateTimeFormat('zh-CN', { month: 'long', day: 'numeric', weekday: 'long' }).format(now)
-const weekdayIndex = now.getDay()
-const isRecoveryDay = weekdayIndex === 0
-const todayPlan = computed(() => weekdayIndex === 0 ? null : plan.days[weekdayIndex - 1])
-const sessionExerciseIds = computed(() => selectedConditions.value.length && !isRecoveryDay
+const selectedSplit = computed(() => selectedTrainingSplit(selectedSplitId.value))
+const todayPlan = computed(() => trainingDayForSplit(selectedSplitId.value, now.getDay()))
+const isRecoveryDay = computed(() => !todayPlan.value || todayPlan.value.isRest)
+const sessionExerciseIds = computed(() => !isRecoveryDay.value
   ? currentSessionExerciseIds(selectedConditionIds.value, todayPlan.value)
   : [])
 const nextExercise = computed(() => sessionExerciseIds.value.map(getExercise).find((item) => item && !completedSet.value.has(item.id)))
@@ -139,20 +180,32 @@ const completedCount = computed(() => sessionExerciseIds.value.filter((id) => co
 const progressPercent = computed(() => sessionExerciseIds.value.length ? Math.round((completedCount.value / sessionExerciseIds.value.length) * 100) : 0)
 const progressStyle = computed(() => ({ background: `conic-gradient(var(--color-teal-500) ${progressPercent.value}%, #dedfd9 0)` }))
 const estimatedMinutes = computed(() => Math.max(3, Math.min(8, Math.ceil((nextExercise.value?.difficulty || 1) * 2.5))))
-const todayPlanTitle = computed(() => todayPlan.value ? `${todayPlan.value.day} · ${todayPlan.value.split}日` : '周日 · 恢复日')
-const todayPlanLabel = computed(() => todayPlan.value ? '按当前示例计划整理' : '轻松活动，留意整体恢复')
+const todayPlanTitle = computed(() => todayPlan.value ? `${todayPlan.value.day} · ${todayPlan.value.focus}` : '今日 · 恢复日')
+const todayPlanLabel = computed(() => todayPlan.value && !todayPlan.value.isRest ? selectedSplit.value.name : '轻松活动，留意整体恢复')
 const todayExerciseCount = computed(() => sessionExerciseIds.value.length)
-const todaySessionSubtitle = computed(() => todayPlan.value ? `${todayExerciseCount.value} 个准备与控制动作` : '轻松活动与恢复提醒')
+const todaySessionSubtitle = computed(() => todayPlan.value && !todayPlan.value.isRest ? `${todayExerciseCount.value} 个身体关注与功能支持动作` : todayPlan.value?.target || '轻松活动与恢复提醒')
 
-const chainPreview = computed(() => {
-  const spine = findSpine(chainEdges(selectedConditionIds.value))
-  const ids = spine.length ? spine : selectedConditionIds.value
-  return ids.slice(0, 4).map(getCondition).filter(Boolean)
+const graphPreview = computed(() => chainGroups(selectedConditionIds.value, chainEdges(selectedConditionIds.value)))
+const chainPreviewGroups = computed(() => graphPreview.value.groups.map((group) => ({
+  ...group,
+  conditions: group.nodeIds.map(getCondition).filter(Boolean),
+})))
+const chainUnlinked = computed(() => graphPreview.value.unlinkedIds.map(getCondition).filter(Boolean))
+const chainSummary = computed(() => {
+  const groupCount = chainPreviewGroups.value.length
+  const unlinkedCount = chainUnlinked.value.length
+  if (!groupCount) return `${unlinkedCount} 个待关联观察项`
+  return `${groupCount} 组关系${unlinkedCount ? ` · ${unlinkedCount} 个待关联` : ''}`
 })
+const selectedSportTrack = computed(() => getFunctionalTrack(selectedSportTrackId.value))
+const sportSuggestion = computed(() => suggestedSportModule(selectedSportTrackId.value, now))
 
 function goBody() { uni.reLaunch({ url: '/pages/body/body' }) }
 function goChain() { uni.reLaunch({ url: '/pages/profile/profile' }) }
-function goTraining() { uni.reLaunch({ url: '/pages/training/training' }) }
+function goTraining(mode = 'today') {
+  const targetMode = typeof mode === 'string' ? mode : 'today'
+  uni.reLaunch({ url: `/pages/training/training?mode=${targetMode}` })
+}
 function goCondition(id) { uni.navigateTo({ url: `/pages/condition/condition?id=${id}` }) }
 </script>
 
@@ -187,13 +240,17 @@ function goCondition(id) { uni.navigateTo({ url: `/pages/condition/condition?id=
 .focus-tag { display: block; margin-top: 3px; color: var(--color-text-muted); font-size: 10px; }
 .focus-more { min-height: 44px; display: flex; align-items: center; justify-content: center; color: var(--color-teal-700); border-top: 1px solid var(--border-soft); font-size: 11px; font-weight: 720; }
 .mini-chain { padding: 15px; }
-.mini-node { min-height: 48px; padding: 8px 10px; display: flex; align-items: center; gap: 11px; background: #f7f5ef; border-radius: 13px; }
+.mini-group + .mini-group { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-soft); }
+.mini-group-title { display: block; margin-bottom: 8px; color: var(--color-teal-700); font-size: 10px; font-weight: 760; }
+.mini-node-row { display: flex; flex-wrap: wrap; gap: 7px; }
+.mini-node { min-height: 48px; padding: 8px 10px; display: flex; align-items: center; gap: 9px; flex: 1 1 140px; background: #f7f5ef; border-radius: 13px; }
 .mini-node > text { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; color: var(--color-teal-700); background: var(--color-teal-100); border-radius: 50%; font-size: 10px; font-weight: 800; }
 .mini-name { display: block; font-size: 12px; font-weight: 710; }
 .mini-status { display: block; margin-top: 2px; color: var(--color-text-muted); font-size: 9px; }
-.mini-arrow { display: block; margin: 3px 0 3px 13px; color: var(--color-teal-500); }
-.mini-more { display: block; margin-top: 10px; color: var(--color-text-muted); font-size: 10px; text-align: center; }
+.mini-unlinked { display: block; color: var(--color-text-secondary); font-size: 11px; line-height: 1.6; }
 .session-strip { min-height: 78px; padding: 14px; display: flex; align-items: center; gap: 12px; }
+.sport-suggestion { min-height: 92px; padding: 14px; display: flex; align-items: center; gap: 12px; }
+.suggestion-kicker { display: block; margin-bottom: 4px; color: var(--color-teal-700); font-size: 10px; font-weight: 760; }
 .session-icon { width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; flex: 0 0 46px; color: var(--color-teal-700); background: var(--color-teal-050); border-radius: 14px; }
 .session-copy { min-width: 0; flex: 1; }
 .session-title { display: block; font-size: 14px; font-weight: 750; }

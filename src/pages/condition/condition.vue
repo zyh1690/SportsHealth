@@ -30,6 +30,11 @@
             <text class="body-copy">{{ condition.symptoms }}</text>
           </view>
 
+          <view v-if="condition.differentialNotes?.length" class="detail-section differential surface-card">
+            <view class="self-head"><PhInfo :size="21" weight="duotone" /><view><text class="detail-heading">需要区分的情况</text><text class="self-note">相似位置的疼痛可能来自不同组织</text></view></view>
+            <text v-for="item in condition.differentialNotes" :key="item" class="differential-line">{{ item }}</text>
+          </view>
+
           <view v-if="condition.selfTest?.exists" class="detail-section self-check surface-card">
             <view class="self-head"><PhClipboardText :size="21" weight="duotone" /><view><text class="detail-heading">自我观察</text><text class="self-note">只用于记录差异，不用于自行确诊</text></view></view>
             <view v-for="(step, index) in condition.selfTest.steps" :key="step" class="self-step">
@@ -45,6 +50,11 @@
             <ChainMap :edges="relationEdges" :selected-ids="relationIds" />
           </view>
         </view>
+      </view>
+
+      <view v-if="condition.managementGuidance?.length" class="detail-section management surface-card">
+        <view class="self-head"><PhHeartbeat :size="21" weight="duotone" /><view><text class="detail-heading">保守处理与返回训练</text><text class="self-note">先调节负荷，再逐步恢复；持续加重时停止并评估</text></view></view>
+        <text v-for="item in condition.managementGuidance" :key="item" class="differential-line">{{ item }}</text>
       </view>
 
       <view class="detail-section">
@@ -63,6 +73,16 @@
         />
       </view>
 
+      <view v-if="condition.references?.length" class="detail-section">
+        <text class="detail-heading">资料来源</text>
+        <text class="section-note">外部资料用于一般健康教育；个体情况仍需结合专业检查</text>
+        <view class="source-list">
+          <view v-for="source in condition.references" :key="source.url" class="source-link surface-card" @tap="openUrl(source.url)">
+            <PhBookOpenText :size="17" /><text>{{ source.name }}</text><PhArrowSquareOut :size="15" />
+          </view>
+        </view>
+      </view>
+
       <view class="legal-note">本页用于一般运动教育与自我记录，不构成诊断或治疗建议。</view>
     </view>
   </view>
@@ -71,11 +91,12 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
-import { PhCheck, PhClipboardText, PhPlus, PhWarning } from '@phosphor-icons/vue'
+import { PhArrowSquareOut, PhBookOpenText, PhCheck, PhClipboardText, PhHeartbeat, PhInfo, PhPlus, PhWarning } from '@phosphor-icons/vue'
 import ChainMap from '../../components/ChainMap.vue'
 import ExerciseCard from '../../components/ExerciseCard.vue'
 import { conditionExerciseRoles, getCondition, getExercise } from '../../data/index.js'
 import { useWorkspace } from '../../stores/workspace.js'
+import { openUrl } from '../../utils/url.js'
 
 const condition = ref(null)
 const { selectedSet, completedSet, toggleCondition, toggleExercise } = useWorkspace()
@@ -115,12 +136,19 @@ onLoad((options) => { condition.value = getCondition(options.id) || null })
 .detail-heading { display: block; color: var(--color-text); font-size: 19px; font-weight: 780; letter-spacing: -0.02em; }
 .body-copy { display: block; margin-top: 9px; color: var(--color-text-secondary); font-size: 14px; line-height: 1.75; }
 .self-check { padding: 17px; }
+.differential { padding: 17px; }
+.management { padding: 17px; }
 .self-head { display: flex; align-items: flex-start; gap: 9px; color: var(--color-teal-700); }
 .self-note { display: block; margin-top: 2px; color: var(--color-text-muted); font-size: 10px; }
 .self-step { margin-top: 13px; display: flex; align-items: flex-start; gap: 10px; color: var(--color-text-secondary); font-size: 12px; line-height: 1.6; }
 .self-step > text { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; flex: 0 0 24px; color: var(--color-teal-700); background: var(--color-teal-050); border-radius: 50%; font-size: 10px; font-weight: 800; }
+.differential-line { display: block; margin-top: 10px; padding-left: 13px; position: relative; color: var(--color-text-secondary); font-size: 12px; line-height: 1.65; }
+.differential-line::before { content: '•'; position: absolute; left: 0; color: var(--color-teal-500); }
 .exercise-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
 .exercise-heading > text { color: var(--color-teal-700); font-size: 11px; font-weight: 700; }
+.source-list { margin-top: 11px; display: grid; gap: 8px; }
+.source-link { min-height: 48px; padding: 0 13px; display: flex; align-items: center; gap: 8px; color: var(--color-teal-700); font-size: 11px; font-weight: 680; }
+.source-link text { min-width: 0; flex: 1; color: var(--color-text-secondary); }
 
 @media (min-width: 860px) {
   .detail-main { padding: 38px 30px 80px; }

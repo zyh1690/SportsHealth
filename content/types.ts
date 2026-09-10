@@ -83,6 +83,10 @@ export interface Condition {
 
   /** 危险信号 —— 什么情况必须马上去医院 */
   redFlags: string[];
+  /** 与相邻症状区域的简要区别提示，不用于自我诊断 */
+  differentialNotes?: string[];
+  /** 保守负荷调整、舒适范围练习与渐进返回提示 */
+  managementGuidance?: string[];
 
   /** 康复训练动作（Exercise id） */
   rehabExercises: string[];
@@ -98,6 +102,7 @@ export interface Condition {
 
   /** 参考来源（如 obsidian 笔记路径） */
   source?: string;
+  references?: { name: string; url: string }[];
   tags?: string[];
   disclaimer: string;
 }
@@ -107,6 +112,8 @@ export type ExerciseCategory =
   | 'stability'     // 稳定
   | 'mobility'      // 灵活性/活动度
   | 'activate'      // 激活（低强度唤醒）
+  | 'power'         // 爆发力 / 快速发力
+  | 'carry'         // 负重行走
   | 'respiratory';  // 呼吸
 
 export interface Exercise {
@@ -178,6 +185,50 @@ export interface Program {
   difficulty: 1 | 2 | 3;
   description: string;
   phases: ProgramPhase[];
+}
+
+export interface TrainingSplitDay {
+  weekday: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+  day: string;
+  focus: string;
+  target: string;
+  isRest?: boolean;
+  supportExerciseIds: string[];
+  postNote?: string;
+}
+
+export interface TrainingSplit {
+  id: string;
+  name: string;
+  shortName: string;
+  frequency: string;
+  audience: string;
+  summary: string;
+  advantages: string[];
+  tradeoffs: string[];
+  recovery: string;
+  days: TrainingSplitDay[];
+}
+
+export interface FunctionalModule {
+  id: string;
+  code: string;
+  name: string;
+  priority: 'primary' | 'secondary' | 'optional';
+  purpose: string;
+  duration: string;
+  frequency: string;
+  placement: string;
+  exercises: { exerciseId: string; purpose: string }[];
+}
+
+export interface FunctionalTrack {
+  id: 'running' | 'hyrox' | 'fitness';
+  name: string;
+  tagline: string;
+  description: string;
+  audience: string;
+  modules: FunctionalModule[];
 }
 
 /** 完整内容库（App 启动时整体加载） */

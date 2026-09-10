@@ -9,9 +9,17 @@ import videosData from '../../content/videos.json'
 import planData from '../../content/plan.json'
 import musclesData from '../../content/muscles.json'
 import exerciseGuidanceData from '../../content/exercise-guidance.json'
+import performanceExercisesData from '../../content/performance-exercises.json'
+import performanceGuidanceData from '../../content/performance-guidance.json'
+import trainingSplitsData from '../../content/training-splits.json'
+import functionalProgramsData from '../../content/functional-programs.json'
+import { collectSelectedRelationshipEdges, groupRelationshipGraph } from './graph-core.mjs'
+import { resolveSelectedSplit, splitDayForWeekday, sportModuleSuggestion, weekRotationIndex } from './training-core.mjs'
 
-const guidanceMap = Object.fromEntries(exerciseGuidanceData.guidance.map((item) => [item.id, item]))
-const enrichedExercises = exercisesData.exercises.map((exercise) => ({
+const allGuidance = [...exerciseGuidanceData.guidance, ...performanceGuidanceData.guidance]
+const allExercises = [...exercisesData.exercises, ...performanceExercisesData.exercises]
+const guidanceMap = Object.fromEntries(allGuidance.map((item) => [item.id, item]))
+const enrichedExercises = allExercises.map((exercise) => ({
   ...exercise,
   ...(guidanceMap[exercise.id] || {}),
 }))
@@ -23,6 +31,9 @@ export const db = {
   videos: videosData.videos,
   plan: planData,
   muscles: musclesData.muscles,
+  trainingSplits: trainingSplitsData.splits,
+  defaultSplitId: trainingSplitsData.defaultId,
+  functionalTracks: functionalProgramsData.tracks,
 }
 
 const byId = (arr) => Object.fromEntries(arr.map((x) => [x.id, x]))
@@ -30,11 +41,13 @@ const regionMap = byId(db.regions)
 const conditionMap = byId(db.conditions)
 const exerciseMap = byId(db.exercises)
 const videoMap = byId(db.videos)
+const functionalTrackMap = byId(db.functionalTracks)
 
 export const getRegion = (id) => regionMap[id]
 export const getCondition = (id) => conditionMap[id]
 export const getExercise = (id) => exerciseMap[id]
 export const getVideo = (id) => videoMap[id]
+export const getFunctionalTrack = (id) => functionalTrackMap[id]
 
 /** 某部位下有多少块肌肉（用于人体图肌肉层） */
 export const muscleCountByRegion = (() => {
@@ -79,43 +92,12 @@ export function resolveExercises(ids) {
  * 返回 [{ from, to, note, status }]。方向只用于组织观察顺序，不声明因果。
  */
 export function chainEdges(selectedIds) {
-  const sel = new Set(selectedIds)
-  const edgesMap = new Map()
-  for (const id of sel) {
-    const c = conditionMap[id]
-    if (!c) continue
-    for (const l of c.downstreamSymptoms || []) {
-      if (sel.has(l.conditionId)) {
-        const k = id + '>' + l.conditionId
-        if (!edgesMap.has(k)) edgesMap.set(k, { from: id, to: l.conditionId, note: l.note, status: l.status || 'needs-validation', reference: l.reference })
-      }
-    }
-  }
-  return [...edgesMap.values()]
+  return collectSelectedRelationshipEdges(db.conditions, selectedIds)
 }
 
-/**
- * 在链子图中找「最长主链」（节点数最多的有向路径）。
- * 小规模图直接 DFS 枚举足够，用于把用户的问题串成一条主线展示。
- */
-export function findSpine(edges, selectedIds = []) {
-  const adj = {}
-  const nodes = new Set(selectedIds)
-  for (const e of edges) {
-    nodes.add(e.from); nodes.add(e.to)
-    ;(adj[e.from] ||= []).push(e.to)
-  }
-  let best = []
-  function dfs(node, path) {
-    if (path.length > best.length) best = [...path]
-    const nextIds = [...(adj[node] || [])].sort((a, b) => (conditionMap[a]?.name || a).localeCompare(conditionMap[b]?.name || b, 'zh-CN'))
-    for (const n of nextIds) {
-      if (!path.includes(n)) dfs(n, [...path, n])
-    }
-  }
-  const orderedNodes = [...nodes].sort((a, b) => (conditionMap[a]?.name || a).localeCompare(conditionMap[b]?.name || b, 'zh-CN'))
-  for (const n of orderedNodes) dfs(n, [n])
-  return best
+/** 将全部已选关系按弱连通分组；不会因“最长路径”丢弃节点或边。 */
+export function chainGroups(selectedIds, edges = chainEdges(selectedIds)) {
+  return groupRelationshipGraph(selectedIds, edges)
 }
 
 /** 汇总一组伤病的所有康复 + 预防动作 id（去重） */
@@ -133,12 +115,35 @@ export function aggregateExerciseIds(conditionIds) {
 /** 去重取得一个星期计划块中的全部动作。 */
 export function exerciseIdsForPlanDay(day) {
   if (!day) return []
-  return [...new Set([...(day.warmup || []), ...(day.functional || []).map((item) => item.id)])]
+  return [...new Set([
+    ...(day.supportExerciseIds || []),
+    ...(day.warmup || []),
+    ...(day.functional || []).map((item) => item.id),
+  ])]
 }
 
 /** 当前关注动作优先，并补充当天星期计划；Today 与 Training 共用。 */
 export function currentSessionExerciseIds(conditionIds, day) {
   return [...new Set([...aggregateExerciseIds(conditionIds), ...exerciseIdsForPlanDay(day)])]
+}
+
+export function selectedTrainingSplit(id) {
+  return resolveSelectedSplit(db.trainingSplits, id, db.defaultSplitId)
+}
+
+export function trainingDayForSplit(splitId, weekday = new Date().getDay()) {
+  return splitDayForWeekday(selectedTrainingSplit(splitId), weekday)
+}
+
+export function suggestedSportModule(trackId, date = new Date()) {
+  return sportModuleSuggestion(getFunctionalTrack(trackId), weekRotationIndex(date))
+}
+
+export function exercisesForFunctionalModule(module) {
+  return (module?.exercises || []).map((item) => ({
+    ...item,
+    exercise: getExercise(item.exerciseId),
+  })).filter((item) => item.exercise)
 }
 
 /** 合并康复与日常维护动作，并保留每个动作承担的角色。 */

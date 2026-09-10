@@ -33,12 +33,17 @@ export default {
 
 page {
   min-height: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
   background: var(--color-bg);
   color: var(--color-text);
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
+*,
+*::before,
+*::after,
 view,
 text,
 input,
@@ -51,9 +56,14 @@ button::after {
   border: 0;
 }
 
-.workspace-page { min-height: 100vh; }
+.workspace-page {
+  min-height: 100vh;
+  max-width: 100%;
+  overflow-x: hidden;
+}
 .workspace-main {
   width: min(100%, var(--content-max));
+  min-width: 0;
   margin: 0 auto;
   padding: max(20px, env(safe-area-inset-top)) 18px calc(106px + env(safe-area-inset-bottom));
 }

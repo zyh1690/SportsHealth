@@ -103,7 +103,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:done'])
 const expanded = ref(props.initiallyExpanded)
-const categories = { strength: '力量', stability: '稳定', mobility: '活动度', activate: '控制', respiratory: '呼吸' }
+const categories = { strength: '力量', stability: '稳定', mobility: '活动度', activate: '控制', respiratory: '呼吸', power: '爆发', carry: '负重行走' }
 const categoryLabel = computed(() => categories[props.exercise.category] || props.exercise.category)
 const equipmentLabel = computed(() => props.exercise.equipment?.length ? props.exercise.equipment.join('、') : '无需器械')
 const verifiedVideos = computed(() =>

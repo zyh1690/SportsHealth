@@ -4,7 +4,7 @@
       <view class="page-header chain-header">
         <view>
           <text class="page-title">动力链</text>
-          <text class="page-subtitle">把已知限制、可能的动作调整与相关表现放在同一条观察路径上。</text>
+          <text class="page-subtitle">把已知限制、可能的动作调整与相关表现按关联分组整理；一个人可以同时有多条动力链。</text>
           <view class="local-note"><PhShieldCheck :size="15" weight="fill" /> 关联是整理线索，不是自动诊断</view>
         </view>
       </view>
@@ -23,7 +23,7 @@
       </view>
 
       <view class="section-heading">
-        <view><text class="section-title">观察路径</text><text class="section-note">点击节点后，下方或右侧立即显示关系说明</text></view>
+        <view><text class="section-title">关联分组</text><text class="section-note">完整展示所有关系、分支与循环；未关联项单独保留</text></view>
       </view>
       <ChainMap :edges="edges" :selected-ids="selectedConditionIds" />
 

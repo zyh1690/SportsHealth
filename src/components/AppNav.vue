@@ -44,11 +44,15 @@ function go(item) {
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100%;
+  max-width: 100%;
   padding: 0 12px calc(8px + env(safe-area-inset-bottom));
+  box-sizing: border-box;
   pointer-events: none;
 }
 .app-nav {
   width: min(100%, 520px);
+  max-width: 100%;
   min-height: 64px;
   margin: 0 auto;
   padding: 4px 8px;

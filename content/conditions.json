@@ -202,6 +202,35 @@
       "disclaimer": "本内容仅供自我健康管理参考，不构成医疗诊断；如有不适请就医。"
     },
     {
+      "id": "cond-pes-anserine",
+      "name": "鹅足滑囊炎 / 鹅足区疼痛",
+      "aliases": ["鹅足", "鹅足滑囊炎", "鹅足肌腱炎", "膝内侧痛", "膝内侧下方疼痛", "pes anserine bursitis", "ézúhuánángyán"],
+      "regions": ["region-knee-right", "region-knee-left"],
+      "system": "musculoskeletal",
+      "symptoms": "膝关节内侧偏下方出现压痛或活动痛，上下楼、跑步、深蹲起身或由椅子站起时可能更明显；休息后可能缓解。",
+      "description": "鹅足区位于膝内侧关节线下方，是缝匠肌、股薄肌和半腱肌肌腱汇合附近。该区域疼痛可能与局部滑囊或肌腱受刺激有关，但仅凭疼痛位置不能确认鹅足滑囊炎，也不能排除其它膝内侧问题。",
+      "selfTest": {
+        "exists": true,
+        "steps": ["先记录疼痛是否位于膝内侧关节线下方，而不是仅笼统记录“膝内侧痛”", "比较平地走、上下楼、坐站和浅蹲时的反应，不反复按压或用疼痛动作挑战", "若关节线本身明显压痛、出现卡锁/打软或近期有扭转外伤，不用自测结果判断鹅足滑囊炎，应寻求评估"],
+        "video": []
+      },
+      "differentialNotes": ["鹅足区不适常位于膝内侧关节线下方；内侧副韧带问题常与侧向应力或外伤有关，但位置会重叠。", "半月板相关表现可能伴关节线疼痛、卡顿、锁住、肿胀或扭转后症状；这些表现需要专业评估。", "持续或加重的膝内侧疼痛不能通过网页自测区分具体组织。"],
+      "managementGuidance": ["先减少会持续诱发症状的跑量、坡度、楼梯或深蹲幅度；不必在舒适的日常活动也完全停止。", "动作保持在可控、舒适的范围内；若训练后明显加重或到第二天仍未回到原有水平，先降低次数、幅度或阻力。", "从髋部和膝部控制、小腿及单腿支撑的低负荷练习开始，动作质量稳定后再逐步增加负荷。", "返回跑步或下肢训练时一次只增加一个变量，例如时长、速度、坡度或负重，并持续记录反应。"],
+      "redFlags": ["明显肿胀、发红发热或发烧", "膝关节锁住、反复打软或无法完全屈伸", "近期外伤后无法负重", "调整活动后仍持续加重或影响日常行走 —— 应就医评估"],
+      "rehabExercises": ["ex-clamshell", "ex-side-lying-abduction", "ex-step-down"],
+      "prevention": ["ex-calf-raise", "ex-single-leg-rdl", "ex-step-down"],
+      "upstreamCauses": [],
+      "downstreamSymptoms": [],
+      "source": "Cleveland Clinic / Mayo Clinic / AAHKS 鹅足滑囊炎资料",
+      "references": [
+        {"name": "Cleveland Clinic · Pes Anserine Bursitis", "url": "https://my.clevelandclinic.org/health/diseases/pes-anserine-bursitis"},
+        {"name": "Mayo Clinic · Knee bursitis", "url": "https://www.mayoclinic.org/diseases-conditions/knee-bursitis/symptoms-causes/syc-20355501"},
+        {"name": "AAHKS · Home Therapy Exercises", "url": "https://www.aahks.org/wp-content/uploads/2020/10/pes-bursitis-exercises.pdf"}
+      ],
+      "tags": ["鹅足", "鹅足滑囊炎", "膝内侧", "跑步", "过度使用"],
+      "disclaimer": "本页只能帮助整理症状与训练反应，不能确认是哪一个组织引起疼痛；持续或明显症状应由医生或物理治疗师评估。"
+    },
+    {
       "id": "cond-itb",
       "name": "髂胫束综合征",
       "aliases": ["ITBS", "髂胫束摩擦综合征", "膝外侧痛", "qiàjìngshù"],

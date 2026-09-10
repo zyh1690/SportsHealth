@@ -1,0 +1,180 @@
+{
+  "guidance": [
+    {
+      "id": "ex-calf-raise", "image": "static/exercises/ex-calf-raise.webp", "imageAlt": "站姿扶墙并用双脚前掌稳定抬起脚跟的提踵示范",
+      "purpose": "提高直膝支撑时的小腿力量与足踝刚度，为跑步蹬地提供基础。", "dosage": "建议起点：2–3 组 × 10–15 次，组间休息 45–60 秒。", "side": "先双脚；动作稳定后再双侧分别练习。",
+      "setup": ["面向墙或扶手站立，双脚与髋同宽", "前脚掌三点均匀压地，膝盖自然伸直但不锁死"],
+      "regression": "双脚同时完成并用双手扶墙。", "progression": "单脚完成、台阶上增加下降幅度，或手持轻负重。",
+      "stopConditions": ["跟腱、足底或踝关节出现锐痛", "无法控制下降或脚踝持续外翻"],
+      "references": [{"name": "AAOS 足踝训练计划", "url": "https://orthoinfo.aaos.org/globalassets/pdfs/foot-and-ankle-conditioning-program---2025.pdf"}]
+    },
+    {
+      "id": "ex-soleus-raise", "image": "static/exercises/ex-soleus-raise.webp", "imageAlt": "扶墙保持膝盖轻屈并抬起双脚脚跟的比目鱼肌提踵示范",
+      "purpose": "在屈膝位强化比目鱼肌，补充跑步支撑期的踝部耐力。", "dosage": "建议起点：2–3 组 × 12–15 次，顶端停 1 秒。", "side": "先双脚；需要时两侧分别完成。",
+      "setup": ["双手轻扶墙，双脚平行", "髋膝轻屈并保持高度，重心落在前脚掌与脚跟之间"],
+      "regression": "减小屈膝角度并缩小提踵幅度。", "progression": "单脚完成，或在膝上放置可控轻负重的坐姿版本。",
+      "stopConditions": ["跟腱或小腿深部锐痛", "膝盖无法保持稳定或足弓明显塌陷"],
+      "references": [{"name": "AAOS 足踝训练计划", "url": "https://orthoinfo.aaos.org/globalassets/pdfs/foot-and-ankle-conditioning-program---2025.pdf"}]
+    },
+    {
+      "id": "ex-step-down", "image": "static/exercises/ex-step-down.webp", "imageAlt": "单脚站在低台阶上缓慢下蹲让另一侧脚跟轻触地面的示范",
+      "purpose": "训练跑步和下坡所需的单腿离心控制，观察髋、膝、踝对线。", "dosage": "建议起点：每侧 2 组 × 6–8 次，下降约 3 秒。", "side": "双侧完成；控制较差侧从更低台阶开始。",
+      "setup": ["单脚站在 10–15 厘米稳固台阶边缘", "另一腿悬空，双手可扶固定支撑物"],
+      "regression": "降低台阶并用手增加支撑。", "progression": "增加台阶高度、减小手扶，或手持轻负重。",
+      "stopConditions": ["膝关节锐痛、肿胀、卡锁或打软", "支撑膝持续内扣且降低高度仍不能修正"],
+      "references": [{"name": "NSCA 跳跃落地与下肢控制", "url": "https://www.nsca.com/education/videos/plyometric-implementation-setup-and-execution-of-jump-landing-positions-to-decrease-likelihood-of-injuries/"}]
+    },
+    {
+      "id": "ex-runner-lunge-balance", "image": "static/exercises/ex-runner-lunge-balance.webp", "imageAlt": "从分腿站姿站起并提膝停在单腿跑步姿势的示范",
+      "purpose": "把分腿力量连接到跑姿单腿稳定，练习推地、提膝与躯干控制。", "dosage": "建议起点：每侧 2 组 × 6 次，单腿位停 2 秒。", "side": "左右交替完成，先从较稳定侧熟悉节奏。",
+      "setup": ["采用舒适分腿站姿，前脚全掌着地", "躯干高而稳定，手臂摆成跑步姿势"],
+      "regression": "扶墙完成，或只做分腿站起不提膝。", "progression": "增加轻负重，或把提膝阶段变为快速但可控的动作。",
+      "stopConditions": ["单腿承重时髋膝踝锐痛", "平衡失控或必须大幅摆动才能站稳"],
+      "references": [{"name": "ACSM 神经运动与阻力训练立场资料", "url": "https://acsm.org/education-resources/pronouncements-scientific-communications/position-stands/"}]
+    },
+    {
+      "id": "ex-farmer-carry", "image": "static/exercises/ex-farmer-carry.webp", "imageAlt": "双手各持一只壶铃并保持躯干直立行走的农夫行走示范",
+      "purpose": "训练HYROX负重行走所需的握力、躯干稳定和负重步态。", "dosage": "建议起点：3 组 × 20–30 米，保持动作稳定。", "side": "双侧同时负重，左右重量一致。",
+      "setup": ["在身体两侧放置两只相同重量的壶铃或哑铃", "髋铰链安全拿起，确认前方路线畅通"],
+      "regression": "减轻重量或缩短距离。", "progression": "先延长距离，再小幅增加负重；不要同时增加两者。",
+      "stopConditions": ["握力突然失效、手腕或肩部锐痛", "无法保持路线安全或身体明显侧摆"],
+      "references": [{"name": "HYROX 25/26 单人赛规则", "url": "https://maintain.hyrox.com/rulebooks/HYROX_RulebookSingles_EN.pdf"}]
+    },
+    {
+      "id": "ex-front-rack-carry", "image": "static/exercises/ex-front-rack-carry.webp", "imageAlt": "双手将壶铃稳定放在肩前架位并直立行走的示范",
+      "purpose": "在前方负重下训练呼吸、上背支撑和躯干抗伸展能力。", "dosage": "建议起点：每侧或双侧 3 组 × 15–25 米。", "side": "可双侧前架；单侧版本需左右等量。",
+      "setup": ["将壶铃安全提到肩前架位", "肘部自然贴近身体，手腕保持中立，路线无障碍"],
+      "regression": "使用单只轻壶铃并缩短距离。", "progression": "延长距离，或改为更重的双侧前架行走。",
+      "stopConditions": ["呼吸受限、手腕麻木或肩前侧锐痛", "腰部持续后仰且减重后仍不能控制"],
+      "references": [{"name": "NSCA 负重行走与综合训练示例", "url": "https://www.nsca.com/contentassets/d517d8be9a724670810caf7050f652c9/ptq5.1.1-strength-training-for-the-older-client-a-blueprint-for-program-design.pdf"}]
+    },
+    {
+      "id": "ex-bear-crawl", "image": "static/exercises/ex-bear-crawl.webp", "imageAlt": "四足位膝盖离地并以对侧手脚小步向前移动的熊爬示范",
+      "purpose": "在四点支撑与移动中训练肩带、核心和对侧协调。", "dosage": "建议起点：3 组 × 10–15 秒或 6–10 米。", "side": "对侧手脚交替，不需要区分训练侧。",
+      "setup": ["四足跪姿，手在肩下、膝在髋下", "脚趾点地后让膝盖离地约数厘米"],
+      "regression": "保持静态熊式支撑，或抬膝后原地轻点手脚。", "progression": "增加前后或侧向距离，但保持小步和躯干稳定。",
+      "stopConditions": ["手腕、肩部或腰部锐痛", "骨盆大幅旋转或肩胛持续塌陷"],
+      "references": [{"name": "NSCA 全身训练动作示例", "url": "https://www.nsca.com/contentassets/d517d8be9a724670810caf7050f652c9/ptq5.1.1-strength-training-for-the-older-client-a-blueprint-for-program-design.pdf"}]
+    },
+    {
+      "id": "ex-walking-lunge", "image": "static/exercises/ex-walking-lunge.webp", "imageAlt": "肩背轻沙袋向前迈步并控制后膝下降的行进弓步示范",
+      "purpose": "练习HYROX行进弓步所需的单腿耐力、负重步态和重复对线。", "dosage": "建议起点：自重或轻负重 3 组 × 每侧 6–8 步。", "side": "左右交替，保持步数一致。",
+      "setup": ["先用自重确认弓步无痛且稳定", "使用沙袋时让其稳定贴近上背并清理行进路线"],
+      "regression": "原地反向弓步，或扶固定支撑物。", "progression": "逐步增加连续步数，再小幅增加负重。",
+      "stopConditions": ["膝关节肿胀、卡锁或打软", "疲劳后膝盖反复内扣或无法稳定起身"],
+      "references": [{"name": "HYROX 25/26 单人赛规则", "url": "https://maintain.hyrox.com/rulebooks/HYROX_RulebookSingles_EN.pdf"}]
+    },
+    {
+      "id": "ex-sled-push-rehearsal", "image": "static/exercises/ex-sled-push-rehearsal.webp", "imageAlt": "双手扶训练雪橇并以稳定前倾姿势连续小步推进的示范",
+      "purpose": "练习HYROX雪橇推进的身体角度、连续步频与全身发力衔接。", "dosage": "建议起点：4 组 × 10–15 米，使用能保持步频的轻负重。", "side": "双侧对称支撑，留意是否总向一侧偏移。",
+      "setup": ["确认雪橇、地面和推进通道适合训练", "双手握稳立柱，先用很轻负重建立身体角度"],
+      "regression": "空雪橇技术练习，或使用墙面斜撑连续提膝。", "progression": "动作稳定后增加距离或负重之一。",
+      "stopConditions": ["胸痛、头晕或异常气短", "腰、膝、踝锐痛或无法维持稳定前倾"],
+      "references": [{"name": "HYROX 25/26 单人赛规则", "url": "https://maintain.hyrox.com/rulebooks/HYROX_RulebookSingles_EN.pdf"}]
+    },
+    {
+      "id": "ex-wall-ball-rehearsal", "image": "static/exercises/ex-wall-ball-rehearsal.webp", "imageAlt": "面对墙面目标持软式药球下蹲并由腿部带动向上投球的示范",
+      "purpose": "练习HYROX墙球的下蹲、伸展、投球和接球节奏，而不是追求比赛次数。", "dosage": "建议起点：3 组 × 6–10 次，组间充分恢复。", "side": "双手持球，双脚均匀发力。",
+      "setup": ["使用软式药球并确认墙面目标和上方空间安全", "先以徒手深蹲确认舒适深度"],
+      "regression": "抱球深蹲后只做轻推，不投高目标。", "progression": "先提高动作连续性，再逐步接近比赛球重或目标高度。",
+      "stopConditions": ["接球失控、肩膝锐痛或动作明显变形", "空间内有人经过或墙面不允许投掷"],
+      "references": [{"name": "HYROX 25/26 单人赛规则", "url": "https://maintain.hyrox.com/rulebooks/HYROX_RulebookSingles_EN.pdf"}]
+    },
+    {
+      "id": "ex-kettlebell-swing", "image": "static/exercises/ex-kettlebell-swing.webp", "imageAlt": "双手壶铃摆动中髋部快速伸展且躯干稳定的侧面示范",
+      "purpose": "把已有力量转化为快速髋伸展与重复功率输出。", "dosage": "建议起点：4 组 × 8–12 次，每组保持速度和技术一致。", "side": "双手版本，不区分侧别。",
+      "setup": ["先掌握无痛硬拉和髋铰链", "壶铃放在身前约一脚距离，双手握稳后向后拉起"],
+      "regression": "壶铃硬拉，或练习短幅髋铰链弹力带拉伸。", "progression": "在动作速度不下降时小幅加重，或增加少量组数。",
+      "stopConditions": ["腰背、肩部或手腕锐痛", "无法用髋伸展驱动而持续变成深蹲前举"],
+      "references": [{"name": "ACE 双手壶铃摆动技术", "url": "https://www.acefitness.org/continuing-education/certified/january-2025/8788/the-ace-do-it-better-series-the-two-handed-kettlebell-swing/"}]
+    },
+    {
+      "id": "ex-turkish-get-up", "image": "static/exercises/ex-turkish-get-up.webp", "imageAlt": "土耳其起身半跪阶段保持单臂负重垂直和躯干稳定的示范",
+      "purpose": "在多个平面和支撑转换中整合肩部稳定、躯干控制与起身协调。", "dosage": "建议起点：每侧 2–3 组 × 1–2 次，先用鞋或极轻负重。", "side": "左右分别完成，先从更容易控制侧学习顺序。",
+      "setup": ["仰卧并用双手把轻负重安全带到胸前上方", "确认周围有足够空间，逐段练习完整顺序"],
+      "regression": "只练滚至肘撑、手撑或半起身阶段。", "progression": "能稳定完成全程后再逐步增加负重。",
+      "stopConditions": ["肩部失稳、锐痛或负重偏离控制范围", "眩晕、起身困难或动作顺序失控"],
+      "references": [{"name": "ACE 土耳其起身技术", "url": "https://www.acefitness.org/continuing-education/certified/march-2025/8824/the-ace-do-it-better-series-the-turkish-get-up/"}]
+    },
+    {
+      "id": "ex-landmine-rotation", "image": "static/exercises/ex-landmine-rotation.webp", "imageAlt": "双手握固定杠铃末端并由脚髋共同转动完成地雷管旋转的示范",
+      "purpose": "训练从脚、髋到躯干和上肢的旋转力量传递。", "dosage": "建议起点：每侧 3 组 × 6–8 次，使用轻负重。", "side": "左右交替，转动范围保持对称且舒适。",
+      "setup": ["把杠铃固定在可靠地雷管底座", "双手握杠铃末端于胸前，双脚略宽于髋"],
+      "regression": "半跪姿小幅地雷管转移，或弹力带抗旋转。", "progression": "增加转动速度或负重之一，保持脚髋同步。",
+      "stopConditions": ["膝盖扭转、腰部锐痛或肩部卡痛", "固定端移动或训练区域不安全"],
+      "references": [{"name": "ACSM 阻力训练与运动表现指南", "url": "https://acsm.org/resistance-training-guidelines-update-2026/"}]
+    },
+    {
+      "id": "ex-med-ball-rotational-throw", "image": "static/exercises/ex-med-ball-rotational-throw.webp", "imageAlt": "侧对墙面由脚髋带动躯干将药球旋转投向墙面的示范",
+      "purpose": "以可释放负荷训练旋转爆发力和下肢到上肢的力量传递。", "dosage": "建议起点：每侧 3–4 组 × 3–5 次，每次追求清晰快速而非疲劳。", "side": "左右分别完成，保持投掷距离和质量接近。",
+      "setup": ["使用适合投墙且可预测反弹的药球", "侧对牢固墙面，确保无人进入反弹区域"],
+      "regression": "跪姿轻球侧向传球，或不接反弹球。", "progression": "先提高投掷速度，再小幅增加球重。",
+      "stopConditions": ["无法控制反弹、空间不安全", "肩腰膝锐痛或膝盖在转动中扭转"],
+      "references": [{"name": "ACE 药球力量与控制训练", "url": "https://www.acefitness.org/continuing-education/certified/august-2026/9179/throw-catch-slam-smarter-medicine-ball-training/"}]
+    },
+    {
+      "id": "ex-med-ball-slam", "image": "static/exercises/ex-med-ball-slam.webp", "imageAlt": "双手将砸地球举过头顶后用全身力量砸向身前地面的示范",
+      "purpose": "训练全身快速屈伸、躯干传力和高意图输出。", "dosage": "建议起点：3–4 组 × 5–8 次，动作速度下降前停止。", "side": "双手版本，不区分侧别。",
+      "setup": ["使用不高弹的专用砸地球", "确认头顶和身前地面有足够安全空间"],
+      "regression": "从胸前做低幅砸地，减少过顶范围。", "progression": "提高投掷意图，或使用稍重球但保持速度。",
+      "stopConditions": ["球反弹不可控或训练区有人进入", "肩、腰、膝出现锐痛或头晕"],
+      "references": [{"name": "ACE 药球力量与控制训练", "url": "https://www.acefitness.org/continuing-education/certified/august-2026/9179/throw-catch-slam-smarter-medicine-ball-training/"}]
+    },
+    {
+      "id": "ex-box-jump", "image": "static/exercises/ex-box-jump.webp", "imageAlt": "面对低跳箱双脚起跳并以屈髋屈膝姿势稳定落在箱面的示范",
+      "purpose": "训练垂直爆发力，并用较低冲击的箱面练习稳定落地。", "dosage": "建议起点：3–4 组 × 3–5 次，每次完全复位。", "side": "双脚起跳和落地，观察左右承重是否均匀。",
+      "setup": ["选择明显低于极限高度的稳固跳箱", "确认箱体防滑且前后空间清空"],
+      "regression": "快速登阶、原地小跳，或跳起后落回地面。", "progression": "先改善起跳速度和落地稳定，再小幅增加箱高。",
+      "stopConditions": ["落地膝盖内扣、失衡或无法安静落地", "膝踝髋疼痛或跳箱不稳"],
+      "references": [{"name": "NSCA 跳跃落地技术", "url": "https://www.nsca.com/education/videos/plyometric-implementation-setup-and-execution-of-jump-landing-positions-to-decrease-likelihood-of-injuries/"}]
+    },
+    {
+      "id": "ex-broad-jump-stick", "image": "static/exercises/ex-broad-jump-stick.webp", "imageAlt": "立定向前跳跃后双脚屈髋屈膝并稳定保持落地的示范",
+      "purpose": "训练水平爆发力，并要求在向前速度后完成制动和稳定。", "dosage": "建议起点：3 组 × 3–4 次，每次落地保持 2 秒。", "side": "双脚起跳和落地，保持承重均匀。",
+      "setup": ["在防滑平整地面标出保守目标距离", "起跳前确认前方及两侧没有障碍"],
+      "regression": "原地摆臂跳并稳定落地，或缩短跳距。", "progression": "增加少量距离，或进行单次跳后快速复位但不连续疲劳跳。",
+      "stopConditions": ["落地疼痛、膝内扣或向前跌步", "地面湿滑或空间不足"],
+      "references": [{"name": "NSCA 增强式训练", "url": "https://www.nsca.com/education/articles/kinetic-select/plyometric-training/"}]
+    },
+    {
+      "id": "ex-lateral-bound", "image": "static/exercises/ex-lateral-bound.webp", "imageAlt": "单腿向侧方跨跳并在对侧腿屈髋屈膝稳定落地的示范",
+      "purpose": "训练额状面爆发力、单腿制动和侧向稳定。", "dosage": "建议起点：每侧 3 组 × 3–5 次，落地停 2 秒。", "side": "左右往返，但每次先完全站稳。",
+      "setup": ["在防滑地面设置较短侧向距离", "先确认单腿浅蹲和原地落地无痛稳定"],
+      "regression": "侧向大步跨移后单腿站稳，不离地跳跃。", "progression": "逐步增加距离，或缩短稳定停顿但保持控制。",
+      "stopConditions": ["落地膝内扣、踝部翻转或无法站稳", "髋膝踝疼痛"],
+      "references": [{"name": "NSCA 增强式训练", "url": "https://www.nsca.com/education/articles/kinetic-select/plyometric-training/"}]
+    },
+    {
+      "id": "ex-cossack-squat", "image": "static/exercises/ex-cossack-squat.webp", "imageAlt": "宽站距向一侧坐髋并保持另一腿伸直的哥萨克深蹲示范",
+      "purpose": "在额状面建立内收肌与臀腿力量，并扩大可控的侧向运动能力。", "dosage": "建议起点：每侧 2–3 组 × 5–8 次。", "side": "左右交替，深度可不同但都保持舒适。",
+      "setup": ["双脚宽于肩，脚尖略向外", "先向一侧坐髋，支撑脚保持全掌着地"],
+      "regression": "扶固定支撑物做浅幅侧向蹲，或改侧向弓步。", "progression": "增加深度，随后使用胸前轻负重。",
+      "stopConditions": ["腹股沟、膝或踝出现锐痛", "为了深度脚跟离地或腰背明显塌陷"],
+      "references": [{"name": "NSCA 综合体能动作示例", "url": "https://www.nsca.com/contentassets/8d845276725a4a40b381eac72a719efd/tsac-report-70.4-fitness-abroad-a-canadian-patrol-frigate.pdf"}]
+    },
+    {
+      "id": "ex-front-rack-reverse-lunge", "image": "static/exercises/ex-front-rack-reverse-lunge.webp", "imageAlt": "双手前架壶铃并向后迈步完成稳定反向弓步的示范",
+      "purpose": "把单腿力量与前架抗伸展、上背支撑整合到同一动作。", "dosage": "建议起点：每侧 3 组 × 5–8 次。", "side": "左右交替或完成一侧后换侧，保持总量一致。",
+      "setup": ["将一只或两只壶铃安全带到肩前架位", "双脚与髋同宽，身后留出撤步空间"],
+      "regression": "自重反向弓步，或单只轻壶铃杯式持握。", "progression": "使用双侧前架，或增加负重但保持躯干位置。",
+      "stopConditions": ["肩腕无法保持舒适前架", "膝髋锐痛或起身时反复失衡"],
+      "references": [{"name": "ACSM 阻力训练与运动表现指南", "url": "https://acsm.org/resistance-training-guidelines-update-2026/"}]
+    },
+    {
+      "id": "ex-suitcase-carry", "image": "static/exercises/ex-suitcase-carry.webp", "imageAlt": "单手持壶铃并保持双肩和骨盆水平直线行走的示范",
+      "purpose": "在不对称负重下训练躯干抗侧屈、握力和步态稳定。", "dosage": "建议起点：每侧 3 组 × 15–25 米。", "side": "左右分别完成相同距离和负重。",
+      "setup": ["把一只壶铃放在身体一侧", "髋铰链拿起并站直，确认前方路线畅通"],
+      "regression": "减轻负重、缩短距离或原地站立保持。", "progression": "先延长距离，再小幅增加负重。",
+      "stopConditions": ["身体无法避免明显侧弯", "握力失效、肩部或腰部锐痛"],
+      "references": [{"name": "NSCA 负重行走训练示例", "url": "https://www.nsca.com/contentassets/d517d8be9a724670810caf7050f652c9/ptq5.1.1-strength-training-for-the-older-client-a-blueprint-for-program-design.pdf"}]
+    },
+    {
+      "id": "ex-copenhagen-plank", "image": "static/exercises/ex-copenhagen-plank.webp", "imageAlt": "侧桥姿势将上侧膝放在长凳上并保持身体成直线的短杠杆哥本哈根侧桥示范",
+      "purpose": "高效训练髋内收肌和侧向躯干稳定，补充常规矢状面力量训练。", "dosage": "建议起点：每侧 2–3 组 × 10–20 秒。", "side": "左右分别完成，从较短保持时间开始。",
+      "setup": ["侧卧在稳固长凳旁，前臂在肩下支撑", "先将上侧膝而非脚踝放在凳面，形成短杠杆"],
+      "regression": "上侧膝支撑并让下侧脚轻触地面辅助。", "progression": "下侧腿离地，随后把支撑点逐步移向上侧脚踝。",
+      "stopConditions": ["腹股沟、内收肌或支撑肩锐痛", "骨盆持续下沉或旋转"],
+      "references": [{"name": "PubMed · 哥本哈根内收训练随机试验", "url": "https://pubmed.ncbi.nlm.nih.gov/26589483/"}]
+    }
+  ]
+}
